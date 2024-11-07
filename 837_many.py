@@ -60,14 +60,10 @@ def generate_ge_segment(group_control_number):
 def generate_iea_segment(interchange_control_number):
     return f"IEA*1*{interchange_control_number}~"
 
-# Generate a full 837 example with dynamic segment count
-def generate_837_example():
+# Generate a single 837 transaction example
+def generate_837_example(control_number, transaction_control_number):
     sender_id = "FAKE837SEND"
     receiver_id = "FAKE837RECV"
-    control_number = "748158818"
-    transaction_control_number = "521718582"
-
-    ## load in csv files for cpt and icd codes
     
     segments = []
     segments.append(generate_isa_segment(sender_id, receiver_id, control_number))
@@ -102,9 +98,8 @@ def generate_837_example():
     segments.append(generate_hi_segment(random.choice(ICD_CODES)))
     segments.append(generate_hi_segment(random.choice(ICD_CODES)))
     
-    # Adding a service line with SV1 for procedure code H0003
+    # Adding a service line with SV1 for a random CPT code
     segments.append("LX*1~")  # Line number segment
-    ## generate random cpt code
     cptcode = random.choice(CPT_CODES)
     segments.append(generate_sv1_segment(cptcode, "20", "UN", "1"))
     segments.append(generate_dtp_segment("472", "D8", "20180428"))
@@ -120,11 +115,16 @@ def generate_837_example():
     # Join segments with newlines for readability
     return "\n".join(segments)
 
-# Generate the example
-example_output = generate_837_example()
-print(example_output)
-
-
-# save example to file in generated_837_institutional_files/ directory
-with open("generated_837_institutional_files/837_example.txt", "w") as file:
-    file.write(example_output)
+# Generate multiple 837 examples and save each to a unique file
+for i in range(5):
+    control_number = f"{748158818 + i}"  # Increment control number for uniqueness
+    transaction_control_number = f"{521718582 + i}"  # Unique transaction control number
+    
+    example_output = generate_837_example(control_number, transaction_control_number)
+    
+    # Save each file with a unique name
+    filename = f"generated_837_institutional_files/837_example_{i + 1}.txt"
+    with open(filename, "w") as file:
+        file.write(example_output)
+    
+    print(f"File {filename} generated successfully.")

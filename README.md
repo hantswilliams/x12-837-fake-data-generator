@@ -1,6 +1,11 @@
 # x12-837-fake-data-generator
 Fake generator for X12 837 form 
 
+## Idea: 
+- (1) Generate 'realish' profiles of patients with proceures and diagnosis using Synthea 
+- (2) Bring this data into a X12 837 form
+- (3) Can then use these realistic data files to test the parsing of X12 837 forms for educational purposes.
+
 ## Required Loops and Segments:
 
 ### Heading Section:
@@ -33,3 +38,10 @@ Fake generator for X12 837 form
 
 # API PARSING: 
 - https://datainsight.health/clinsight/swagger-ui/index.html#/File/fetchFiles 
+
+## Testing and Other Resources: 
+### Tutorials and basics:
+- https://datainsight.health/edi/intro/ 
+### Testing: 
+- https://www.stedi.com/edi/inspector 
+- https://datainsight.health/edi/viewer/ 

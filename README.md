@@ -1,6 +1,11 @@
 # x12-837-fake-data-generator
 Fake generator for X12 837 form 
 
+# TO DO: 
+- need to replace some of the faker addresses with REAL ADDRESS that are randomly selected; or perhaps with real people names as well 
+    - this is will then help with the later merging of resources and services 
+    - and potential identification of payers (?) or NPI locations (?) that are in X proxomity 
+
 ## Idea: 
 - (1) Generate 'realish' profiles of patients with proceures and diagnosis using Synthea 
 - (2) Bring this data into a X12 837 form

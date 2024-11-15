@@ -154,13 +154,13 @@ def generate_nm1_segment(identifier_code, name, entity_id):
     return f"NM1*{identifier_code}*2*{name}*****XX*{entity_id}~"
 
 #### generate NM1 segment for subscriber
-def generate_nm1_segment_subscriber(identifier_code, firstname, lastname, subscriber_id):
+def generate_nm1_segment_subscriber(identifier_code, firstname, lastname, middlename, subscriber_id):
     ## NM1*IL*1*ABCDEFGH*IJKLMNOP*B***MI*111111100~
     position1 = identifier_code
     position2 = "1"
     position3 = firstname
     position4 = lastname
-    position5 = "B"
+    position5 = middlename
     position6 = "MI"
     position7 = subscriber_id
     return f"NM1*{position1}*{position2}*{position3}*{position4}*{position5}***{position6}*{position7}~"

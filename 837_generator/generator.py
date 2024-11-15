@@ -1,4 +1,8 @@
 import os
+import pandas as pd
+import regex
+
+from faker import Faker
 
 from segments import (
     generate_isa_segment, generate_gs_segment, generate_st_segment,
@@ -7,16 +11,67 @@ from segments import (
     generate_hi_segment, generate_sv1_segment, generate_se_segment,
     generate_ge_segment, generate_iea_segment
 )
-from data_loader import load_codes
+from data_loader import load_codes, load_orgs, load_payers
 from utils import get_random_code
+from random import randint, choice
 
 def generate_837_transaction():
-    # Load ICD and CPT codes
+
+    # Load ICD and CPT codes, orgs, and payers
     icd_codes, cpt_codes = load_codes()
-    sender_id = "FAKE837SEND"
-    receiver_id = "FAKE837RECV"
-    control_number = "748158818"
-    transaction_control_number = "521718582"
+    orgs = load_orgs()
+    payers = load_payers()
+
+    ## select a random row from payers 
+    payer = payers.sample(1)
+    payer_name = payer['ProductName'].values[0]
+    payer_name = regex.sub(r'[^\w\s]', '', payer_name).replace(" ", "")[:60]
+    payer_hios_product_id = payer['HIOSProductID'].values[0]
+    payer_faker_firstname = Faker().first_name()
+    payer_faker_lastname = Faker().last_name()
+    payer_telephone_10digits = "".join([str(randint(0, 9)) for _ in range(10)])
+
+    # create random sender_id, receiver_id, control_number, transaction_control_number
+    sender_id_generated = "".join([str(randint(0, 9)) for _ in range(15)])
+    receiver_id_generated = payer_name + "".join([str(randint(0, 9)) for _ in range(12)]) + "001"
+    receiver_id_generated = receiver_id_generated[:15]
+    control_number_generated = "".join([str(randint(0, 9)) for _ in range(9)])
+    transaction_control_number_generated = "".join([str(randint(0, 9)) for _ in range(randint(4, 9))])
+
+    sender_id = sender_id_generated
+    receiver_id = receiver_id_generated
+    control_number = control_number_generated
+    transaction_control_number = transaction_control_number_generated
+
+    # Select a random row from orgs df
+    random_org = orgs.sample(1)
+    ## get the random orgs NPI, and business name, Authorized Official Last Name, Authorized Official First Name, and Authorized Official Telephone Number
+    random_org_npi = random_org['NPI'].values[0]
+    random_org_name = random_org['Provider Organization Name (Legal Business Name)'].values[0][:60]
+    random_org_official_firstname = random_org['Authorized Official First Name'].values[0]
+    random_org_official_lastname = random_org['Authorized Official Last Name'].values[0]
+    random_org_official_telephone = random_org['Authorized Official Telephone Number'].values[0].astype(str)[:10]
+    random_org_business_address = random_org['Provider First Line Business Mailing Address'].values[0]
+    random_org_business_cityname = random_org['Provider Business Mailing Address City Name'].values[0]
+    random_org_business_state = random_org['Provider Business Mailing Address State Name'].values[0]
+    random_org_business_postal = random_org['Provider Business Mailing Address Postal Code'].values[0].astype(str)[:5]
+    random_org_ein = "".join([str(randint(0, 9)) for _ in range(9)])
+    random_org_ein = f"{random_org_ein[:2]}-{random_org_ein[2:]}"
+
+
+    ### subscriber information
+    ## create random combination of letters and characters, between 5-10 in length
+    subscriber_reference_id = "".join([str(randint(0, 9)) for _ in range(9)])
+    subscriber_faker_firstname = Faker().first_name()
+    subscriber_faker_lastname = Faker().last_name()
+    subscriber_faker_middle_initial = Faker().random_uppercase_letter()
+    subscriber_member_identification_id = "".join([str(randint(0, 9)) for _ in range(12)])
+    subscriber_faker_stress_address = Faker().street_address()
+    subscriber_faker_city = Faker().city()
+    subscriber_faker_state = Faker().state_abbr()
+    subscriber_faker_zipcode = Faker().zipcode_in_state()
+
+
 
     # Start creating segments list
     segments = [
@@ -28,13 +83,13 @@ def generate_837_transaction():
         generate_st_segment(transaction_control_number),
         generate_bht_segment(),
         ## 
-        generate_nm1_segment("41", "Submitter Organization Hospital A", "4675433976"),
+        generate_nm1_segment("41", random_org_name, random_org_npi),
         ## submitter
-        generate_per_segment("Adam Velasquez Submitter Person", "2492742731"),
-        ## receiver
-        generate_nm1_segment("40", "Receiver Organization United Health", "0238660013"),
+        generate_per_segment(f'{random_org_official_firstname} {random_org_official_lastname}', random_org_official_telephone),
+        ## receiver !!!!! ideally this should match the receiver_id_selections organization along with the NPI
+        generate_nm1_segment("40", payer_name, payer_hios_product_id),
         ## receiver contact
-        generate_per_segment("Jorge Mccarthy Receiver Person ", "2287014467"),
+        generate_per_segment(f'{payer_faker_firstname} {payer_faker_lastname}', payer_telephone_10digits),
     ]
     
 
@@ -51,11 +106,11 @@ def generate_837_transaction():
     hierarchical_id_billing = 1
     segments.append(generate_hl_segment(hierarchical_id_billing, "", 20, 1))
     # Loop 2010AA - Billing Provider (BP) Name
-    segments.append(generate_nm1_segment("85", "Garcia Ltd", "5709867528"))
-    segments.append("N3*5921 Lisa Inlet~")
-    segments.append("N4*East Jeffery*TN*34498~")
-    segments.append("REF*EI*628740805~")
-    segments.append(generate_per_segment("Juan Ramirez", "2287014467"))
+    segments.append(generate_nm1_segment("85", random_org_name, random_org_npi))
+    segments.append(f'N3*{random_org_business_address}~')
+    segments.append(f'N4*{random_org_business_cityname}*{random_org_business_state}*{random_org_business_postal}~')
+    segments.append(f'REF*EI*{random_org_ein}~')
+    segments.append(generate_per_segment(f'{random_org_official_firstname} {random_org_official_lastname}', random_org_official_telephone))
 
 
     # HL Segment for Subscriber (e.g., Patient)
@@ -64,11 +119,11 @@ def generate_837_transaction():
     hierarchical_id_subscriber = 2
     # Example: HL*2*1*22*0~
     segments.append(generate_hl_segment(hierarchical_id_subscriber, hierarchical_id_billing, 22, 0))
-    segments.append('SBR*P*18*ABCDE01234******CI~')
+    segments.append(f'SBR*P*18*{subscriber_reference_id}******CI~')
     ## Loop 2010BA - Subscriber (SBR) Name
-    segments.append(generate_nm1_segment_subscriber("IL", "Kristin", "Phillips", "7932682729"))
-    segments.append("N3*83816 Maria Estate Suite 225~")
-    segments.append("N4*East Nicholas*WV*09804~")
+    segments.append(generate_nm1_segment_subscriber("IL", subscriber_faker_firstname, subscriber_faker_lastname, subscriber_faker_middle_initial, subscriber_member_identification_id))
+    segments.append(f'N3*{subscriber_faker_stress_address}~')
+    segments.append(f'N4*{subscriber_faker_city}*{subscriber_faker_state}*{subscriber_faker_zipcode}~')
 
 
     # Claim Information

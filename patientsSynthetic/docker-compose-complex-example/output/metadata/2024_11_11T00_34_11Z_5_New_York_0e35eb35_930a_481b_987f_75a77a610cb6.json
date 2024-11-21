@@ -1,0 +1,20 @@
+{
+  "runID": "0e35eb35-930a-481b-987f-75a77a610cb6",
+  "seed": 1731285251453,
+  "clinicianSeed": 1731285251453,
+  "referenceTime": "20241111",
+  "endTime": "20241111",
+  "version": "2cc0a62\n",
+  "patientCount": 5,
+  "providerCount": 2894,
+  "payerCount": 9,
+  "javaVersion": "11.0.16",
+  "generate.thread_pool_size": -1,
+  "generatorThreads": 8,
+  "runStartTime": "2024-11-11T00:34:11Z",
+  "runTimeInSeconds": 13,
+  "exporter.years_of_history": "10",
+  "age": "35-45",
+  "state": "New York",
+  "modules": "*"
+}

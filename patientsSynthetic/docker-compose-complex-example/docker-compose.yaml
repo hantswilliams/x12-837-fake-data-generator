@@ -1,0 +1,13 @@
+version: '3.8'
+
+services:
+  synthea:
+    build:
+      context: .  # Assumes a Dockerfile is in the same directory as this docker-compose file
+    volumes:
+      - ${PWD}/output:/synthea/output  # Uses the current directory as the root path    
+    entrypoint: ["java", "-jar", "synthea-with-dependencies.jar"]
+
+volumes:
+  output:
+    driver: local

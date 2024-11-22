@@ -1,18 +1,20 @@
 # x12-837-fake-data-generator
-Fake generator for X12 837 form 
+For generating realistic but fake 837 files for learning purposes in healthcare
 
-# TO DO: 
-- need to replace some of the faker addresses with REAL ADDRESS that are randomly selected; or perhaps with real people names as well 
-    - this is will then help with the later merging of resources and services 
-    - and potential identification of payers (?) or NPI locations (?) that are in X proxomity 
+## Creating your data: 
 
-## Idea: 
-- (1) Generate 'realish' profiles of patients with proceures and diagnosis using Synthea 
-- (2) Bring this data into a X12 837 form
-- (3) Can then use these realistic data files to test the parsing of X12 837 forms for educational purposes.
+## The basic idea: 
+- (1) Being able to generate 'realish' profiles of patients with proceures and diagnosis 
+- (2) Push this data into a X12 837 form (.txt file) like what would be sent to a payer
+- (3) Then also have a parser to read this data into csv/tabular structure for analyses that would be useful for healthcare providers and payers
+- (4) Overall, this should promote training and understanding of the X12 837 form and how it is used in healthcare
+
+## Testing of generated 837 files:
+- For checking data structure/schema of generated 837 files from this repo with third party tools you can use:
+    - https://www.stedi.com/edi/inspector 
+    - https://datainsight.health/edi/viewer/ 
 
 ## Required Loops and Segments:
-
 ### Heading Section:
 - ST: Transaction Set Header (mandatory)
 - BHT: Beginning of Hierarchical Transaction (mandatory)
@@ -38,15 +40,17 @@ Fake generator for X12 837 form
 ### Loop 2000 
 - With HL for defining hierarchical levels (this might be required if not already included).
 
-# PARSING: 
+
+
+# TO DO: 
+- need to replace some of the faker addresses with REAL ADDRESS that are randomly selected; or perhaps with real people names as well 
+- this is will then help with the later merging of resources and services 
+- and potential identification of payers (?) or NPI locations (?) that are in X proxomity 
+
+# Interesting References and resources:
+### Parsing from Databricks: 
 - https://github.com/databricks-industry-solutions/x12-edi-parser 
-
-# API PARSING: 
+### API based parsing from 3rd party: 
 - https://datainsight.health/clinsight/swagger-ui/index.html#/File/fetchFiles 
-
-## Testing and Other Resources: 
 ### Tutorials and basics:
 - https://datainsight.health/edi/intro/ 
-### Testing: 
-- https://www.stedi.com/edi/inspector 
-- https://datainsight.health/edi/viewer/ 

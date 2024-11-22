@@ -1,4 +1,5 @@
 import csv
+from io import StringIO
 
 ##### Loop 2000B for Subscriber; HL*2, SBR, NM1*IL, N3, N4 segments ####
 ##### Loop 2000B for Subscriber; HL*2, SBR, NM1*IL, N3, N4 segments ####
@@ -6,7 +7,7 @@ import csv
 ##### Loop 2000B for Subscriber; HL*2, SBR, NM1*IL, N3, N4 segments ####
 
 
-def parse_subscriber_segment(filepath, output_csv):
+def parse_subscriber_segment(filepath):
     # Open and read the file content
     with open(filepath, 'r') as file:
         content = file.read()
@@ -29,13 +30,13 @@ def parse_subscriber_segment(filepath, output_csv):
         # Start of the subscriber section
         if segment.startswith('HL*2*1*22*0'):
             capture_section = True
-            print("Subscriber section start found:", segment)
+            # print("Subscriber section start found:", segment)
             # Initialize a new record for subscriber data
             subscriber_record = {"HL Segment": segment}
 
         # Stop capturing when we encounter the CLM segment
         elif segment.startswith('CLM') and capture_section:
-            print("CLM segment found. Ending subscriber section capture.")
+            # print("CLM segment found. Ending subscriber section capture.")
             subscriber_data.append(subscriber_record)
             break  # Exit as we have reached the end of the subscriber section
 
@@ -51,7 +52,7 @@ def parse_subscriber_segment(filepath, output_csv):
                     "Subscriber Group or Policy Number (SBR03)": elements[3].strip() if len(elements) > 3 else "",
                     "Claim Filing Indicator Code (SBR09)": elements[9].strip() if len(elements) > 9 else ""
                 })
-                print("Parsed SBR data:", subscriber_record)
+                # print("Parsed SBR data:", subscriber_record)
 
             # Parse NM1 segment for subscriber name and ID
             elif segment.startswith('NM1*IL'):
@@ -63,14 +64,14 @@ def parse_subscriber_segment(filepath, output_csv):
                     "Identification Code Qualifier (NM108)": elements[8].strip() if len(elements) > 8 else "",
                     "Subscriber ID (NM109)": elements[9].strip() if len(elements) > 9 else ""
                 })
-                print("Parsed NM1 data:", subscriber_record)
+                # print("Parsed NM1 data:", subscriber_record)
 
             # Parse N3 segment for subscriber address
             elif segment.startswith('N3'):
                 subscriber_record.update({
                     "Subscriber Address Line (N301)": elements[1].strip() if len(elements) > 1 else ""
                 })
-                print("Parsed N3 data:", subscriber_record)
+                # print("Parsed N3 data:", subscriber_record)
 
             # Parse N4 segment for subscriber city, state, and zip
             elif segment.startswith('N4'):
@@ -79,7 +80,7 @@ def parse_subscriber_segment(filepath, output_csv):
                     "Subscriber State Code (N402)": elements[2].strip() if len(elements) > 2 else "",
                     "Subscriber Postal Code (N403)": elements[3].strip() if len(elements) > 3 else ""
                 })
-                print("Parsed N4 data:", subscriber_record)
+                # print("Parsed N4 data:", subscriber_record)
     
     # Write to CSV
     if subscriber_data:
@@ -100,13 +101,20 @@ def parse_subscriber_segment(filepath, output_csv):
             "Subscriber State Code (N402)",
             "Subscriber Postal Code (N403)"
         ]
+
+        # create in memory file that gets returned
+        output = StringIO()
+        writer = csv.DictWriter(output, fieldnames=fieldnames)
+        writer.writeheader()
+        writer.writerows(subscriber_data)
+        return output.getvalue()
         
-        with open(output_csv, 'w', newline='') as csvfile:
-            writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
-            writer.writeheader()
-            writer.writerows(subscriber_data)
+        # with open(output_csv, 'w', newline='') as csvfile:
+        #     writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
+        #     writer.writeheader()
+        #     writer.writerows(subscriber_data)
         
-        print(f"Subscriber section data written to {output_csv}")
+        # print(f"Subscriber section data written to {output_csv}")
 
 # Example usage
-parse_subscriber_segment('generated_837_institutional_files/837_example_3.txt', 'generated_837_institutional_files/header_subscriber.csv')
+# parse_subscriber_segment('generated_837_institutional_files/837_example_3.txt', 'generated_837_institutional_files/header_subscriber.csv')

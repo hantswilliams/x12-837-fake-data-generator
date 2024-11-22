@@ -1,8 +1,5 @@
-import os
-import pandas as pd
 import regex
 from random import randint, sample
-
 from faker import Faker
 
 from segments import (
@@ -242,15 +239,15 @@ def generate_837_transaction():
     
     return "\n".join(segments)
 
-# Usage Example
-if __name__ == "__main__":
-    number_of_files = 10 # number of files to generate
-    for i in range(number_of_files):
-        example_output = generate_837_transaction()
-        with open(f"837_generator_output/837_example_{i}.txt", "w") as file:
-            file.write(example_output)
-        print(f"837 Example {i} has been generated successfully!")
-    print("All 837 Examples have been generated successfully!")
+# # Usage Example
+# if __name__ == "__main__":
+#     number_of_files = 10 # number of files to generate
+#     for i in range(number_of_files):
+#         example_output = generate_837_transaction()
+#         with open(f"837_generator_output/837_example_{i}.txt", "w") as file:
+#             file.write(example_output)
+#         print(f"837 Example {i} has been generated successfully!")
+#     print("All 837 Examples have been generated successfully!")
 
 
 

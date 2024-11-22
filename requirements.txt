@@ -1,6 +1,3 @@
 faker
-pandas
-git+https://github.com/databricks-industry-solutions/x12-edi-parser
-pyspark
-spaceavocado-x12
 regex
+pandas

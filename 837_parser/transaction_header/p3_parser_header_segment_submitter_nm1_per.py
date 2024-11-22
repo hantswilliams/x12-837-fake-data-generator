@@ -1,4 +1,5 @@
 import csv
+from io import StringIO
 
 #### LOOP 1000A for Submitter Name; NM1*41 and PER segments ####
 #### LOOP 1000A for Submitter Name; NM1*41 and PER segments ####
@@ -7,7 +8,7 @@ import csv
 
 # 41 = Submitter
 
-def parse_submitter_segment(filepath, output_csv):
+def parse_submitter_segment(filepath):
     # Open and read the file content
     with open(filepath, 'r') as file:
         content = file.read()
@@ -32,16 +33,16 @@ def parse_submitter_segment(filepath, output_csv):
             elements = segment.split('*')
             # print("NM1*41 segment found:", elements)
 
-            ## print what will be stripped NM101, NM102, NM103, NM108, NM109
-            print('Element1: ', elements[1].strip()) ## NM101
-            print('Element2: ', elements[2].strip()) ## NM102
-            print('Element3: ', elements[3].strip()) ## NM103
-            print('Element4: ', elements[4].strip())
-            print('Element5: ', elements[5].strip())
-            print('Element6: ', elements[6].strip())
-            print('Element7: ', elements[7].strip())
-            print('Element8: ', elements[8].strip()) ## NM108
-            print('Element9: ', elements[9].strip()) ## NM109
+            # ## print what will be stripped NM101, NM102, NM103, NM108, NM109
+            # print('Element1: ', elements[1].strip()) ## NM101
+            # print('Element2: ', elements[2].strip()) ## NM102
+            # print('Element3: ', elements[3].strip()) ## NM103
+            # print('Element4: ', elements[4].strip())
+            # print('Element5: ', elements[5].strip())
+            # print('Element6: ', elements[6].strip())
+            # print('Element7: ', elements[7].strip())
+            # print('Element8: ', elements[8].strip()) ## NM108
+            # print('Element9: ', elements[9].strip()) ## NM109
             
             # Collect values for NM1*41
             nm1_data = {
@@ -52,7 +53,7 @@ def parse_submitter_segment(filepath, output_csv):
                 "Entity ID (NM109)": elements[9].strip()
             }
             submitter_data.append(nm1_data)
-            print("Parsed NM1*41 data:", nm1_data)
+            # print("Parsed NM1*41 data:", nm1_data)
             
             # Set flag to capture the next PER segment
             capture_next_per = True
@@ -61,7 +62,7 @@ def parse_submitter_segment(filepath, output_csv):
         elif capture_next_per and segment.startswith('PER*'):
             # Split by '*' to get each element within the PER segment
             elements = segment.split('*')
-            print("PER segment found:", elements)
+            # print("PER segment found:", elements)
             
             # Update the last added entry in submitter_data with PER details
             submitter_data[-1].update({
@@ -69,7 +70,7 @@ def parse_submitter_segment(filepath, output_csv):
                 "Communication Number Qualifier (PER03)": elements[3].strip() if len(elements) > 3 else "",
                 "Phone Number (PER04)": elements[4].strip() if len(elements) > 4 else ""
             })
-            print("Parsed PER data added to submitter data:", submitter_data[-1])
+            # print("Parsed PER data added to submitter data:", submitter_data[-1])
             
             # Reset flag to avoid capturing subsequent PER segments
             capture_next_per = False
@@ -90,15 +91,23 @@ def parse_submitter_segment(filepath, output_csv):
         "Communication Number Qualifier (PER03)",
         "Phone Number (PER04)"
     ]
-    
-    # Write the parsed data to a CSV file
-    with open(output_csv, 'w', newline='') as csvfile:
-        writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
-        writer.writeheader()
-        writer.writerows(submitter_data)
 
-    print(f"Submitter segment data written to {output_csv}")
+    # create in memory file that gets returned
+    output = StringIO()
+    writer = csv.DictWriter(output, fieldnames=fieldnames)
+    writer.writeheader()
+    writer.writerows(submitter_data)
+    return output.getvalue()
+
+    
+    # # Write the parsed data to a CSV file
+    # with open(output_csv, 'w', newline='') as csvfile:
+    #     writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
+    #     writer.writeheader()
+    #     writer.writerows(submitter_data)
+
+    # print(f"Submitter segment data written to {output_csv}")
 
 # Example usage
-parse_submitter_segment('generated_837_institutional_files/837_example_3.txt', 'generated_837_institutional_files/header_submitter.csv')
+# parse_submitter_segment('generated_837_institutional_files/837_example_3.txt', 'generated_837_institutional_files/header_submitter.csv')
 

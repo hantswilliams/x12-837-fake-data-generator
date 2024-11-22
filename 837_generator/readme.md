@@ -7,7 +7,10 @@
 ├── segments.py      # Module to generate individual segments
 ├── generator.py     # Main script to generate 837 files
 ├── utils.py         # Utility functions for date formatting, random selections, etc.
-└── codexes/         # Folder for ICD-10 and CPT CSV files
-    ├── icd10.csv
-    └── cpt4.csv
+└── reference_data/         # Folder for ICD-10 and CPT CSV files
+    ├── cpt4.csv
+    └── hopspitals.csv
+    └── icd10.csv
+    └── npi_orgs.csv
+    └── payers.csv
 ```

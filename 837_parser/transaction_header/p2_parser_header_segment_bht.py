@@ -1,6 +1,7 @@
 import csv
+from io import StringIO
 
-def parse_bht_segment(filepath, output_csv):
+def parse_bht_segment(filepath):
     # Open and read the file content
     with open(filepath, 'r') as file:
         content = file.read()
@@ -20,7 +21,7 @@ def parse_bht_segment(filepath, output_csv):
         if segment.startswith('BHT*'):
             # Split by '*' to get each element within the BHT segment
             elements = segment.split('*')
-            print("BHT segment found:", elements)
+            # print("BHT segment found:", elements)
             
             # Collect the six expected values, ensuring elements exist
             bht_segment_data = {
@@ -32,7 +33,7 @@ def parse_bht_segment(filepath, output_csv):
                 "Transaction Type Code (BHT06)": elements[6].strip() if len(elements) > 6 else ""
             }
             bht_segments.append(bht_segment_data)
-            print("Parsed BHT segment data:", bht_segment_data)
+            # print("Parsed BHT segment data:", bht_segment_data)
             break  # Stop after the first BHT segment is found
     
     # Check if any BHT segments were collected
@@ -49,15 +50,22 @@ def parse_bht_segment(filepath, output_csv):
         "Time (BHT05)",
         "Transaction Type Code (BHT06)"
     ]
-    
-    # Write the parsed data to a CSV file
-    with open(output_csv, 'w', newline='') as csvfile:
-        writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
-        writer.writeheader()
-        writer.writerows(bht_segments)
 
-    print(f"BHT segment data written to {output_csv}")
+    # create in memory file that gets returned
+    output = StringIO()
+    writer = csv.DictWriter(output, fieldnames=fieldnames)
+    writer.writeheader()
+    writer.writerows(bht_segments)
+    return output.getvalue()
+    
+    # # Write the parsed data to a CSV file
+    # with open(output_csv, 'w', newline='') as csvfile:
+    #     writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
+    #     writer.writeheader()
+    #     writer.writerows(bht_segments)
+
+    # print(f"BHT segment data written to {output_csv}")
 
 # Example usage
-parse_bht_segment('generated_837_institutional_files/837_example_3.txt', 'generated_837_institutional_files/header_bht.csv')
+# parse_bht_segment('generated_837_institutional_files/837_example_3.txt', 'generated_837_institutional_files/header_bht.csv')
 

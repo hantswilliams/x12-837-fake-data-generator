@@ -12,7 +12,6 @@ def load_orgs(org_path='reference_codexes/npi_orgs.csv'):
     orgs_df = pd.read_csv(org_path, low_memory=False)
     return orgs_df
 
-
 def load_payers(payer_path='reference_codexes/payers.csv'):
     payers_df = pd.read_csv(payer_path, low_memory=False)
     payers_df = payers_df[payers_df['ProductType'].str.contains('PPO|POS|HMO')]
@@ -20,6 +19,9 @@ def load_payers(payer_path='reference_codexes/payers.csv'):
     return payers_df
 
 
+
+
+##### FUTURE SECTION NOT YET INCORPORATED ######
 def synthea_data_loader(data_path='patientsSynthetic/docker-simple-example/output/csv/'):
     patients = pd.read_csv(data_path + 'patients.csv', low_memory=False)
     conditions = pd.read_csv(data_path + 'conditions.csv', low_memory=False)
@@ -30,11 +32,9 @@ def synthea_data_loader(data_path='patientsSynthetic/docker-simple-example/outpu
 
 patients, conditions, procedures, claims, claims_transactions = synthea_data_loader()
 
-
 ## print where conditions has a description that contains disorder
 conditions_disorders = conditions[conditions['DESCRIPTION'].str.contains('disorder')]
 conditions_disorders['DESCRIPTION'].value_counts()
-
 
 #### the claims_transactions.csv contains the procedure (HCPCS/CPT in snowmed format), and then 
 #### references the claim 

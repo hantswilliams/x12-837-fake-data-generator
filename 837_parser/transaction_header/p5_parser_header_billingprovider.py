@@ -1,4 +1,5 @@
 import csv
+from io import StringIO
 
 ##### Loop 2000A for Billing Provider; HL*1, NM1*85, N3, N4, REF, PER segments ####
 ##### Loop 2000A for Billing Provider; HL*1, NM1*85, N3, N4, REF, PER segments ####
@@ -7,7 +8,7 @@ import csv
 
 # 85 = Billing Provider
 
-def parse_billing_provider_segment(filepath, output_csv):
+def parse_billing_provider_segment(filepath):
     # Open and read the file content
     with open(filepath, 'r') as file:
         content = file.read()
@@ -30,13 +31,13 @@ def parse_billing_provider_segment(filepath, output_csv):
         # Start of the billing provider section
         if segment.startswith('HL*1**20*1'):
             capture_section = True
-            print("Billing provider section start found:", segment)
+            # print("Billing provider section start found:", segment)
             # Initialize a new record for billing provider data
             billing_provider_record = {"HL Segment": segment}
 
         # Check if a new HL section starts, ending the current billing provider loop
         elif segment.startswith('HL*') and capture_section:
-            print("New HL section found. Ending billing provider section capture.")
+            # print("New HL section found. Ending billing provider section capture.")
             billing_provider_data.append(billing_provider_record)
             break  # Exit as we have reached the end of the billing provider section
 
@@ -60,7 +61,7 @@ def parse_billing_provider_segment(filepath, output_csv):
                 billing_provider_record.update({
                     "Billing Provider Address Line (N301)": elements[1].strip() if len(elements) > 1 else ""
                 })
-                print("Parsed N3 data:", billing_provider_record)
+                # print("Parsed N3 data:", billing_provider_record)
 
             # Parse N4 segment for city, state, and zip
             elif segment.startswith('N4'):
@@ -69,7 +70,7 @@ def parse_billing_provider_segment(filepath, output_csv):
                     "Billing Provider State Code (N402)": elements[2].strip() if len(elements) > 2 else "",
                     "Billing Provider Postal Code (N403)": elements[3].strip() if len(elements) > 3 else ""
                 })
-                print("Parsed N4 data:", billing_provider_record)
+                # print("Parsed N4 data:", billing_provider_record)
 
             # Parse REF segment for billing provider tax ID
             elif segment.startswith('REF*EI'):
@@ -77,7 +78,7 @@ def parse_billing_provider_segment(filepath, output_csv):
                     "Reference Identification Qualifier (REF01)": elements[1].strip() if len(elements) > 1 else "",
                     "Billing Provider Tax Identification Number (REF02)": elements[2].strip() if len(elements) > 2 else ""
                 })
-                print("Parsed REF data:", billing_provider_record)
+                # print("Parsed REF data:", billing_provider_record)
 
             # Parse PER segment for billing provider contact information
             elif segment.startswith('PER*IC'):
@@ -87,7 +88,7 @@ def parse_billing_provider_segment(filepath, output_csv):
                     "Communication Number Qualifier (PER03)": elements[3].strip() if len(elements) > 3 else "",
                     "Communication Number (PER04)": elements[4].strip() if len(elements) > 4 else ""
                 })
-                print("Parsed PER data:", billing_provider_record)
+                # print("Parsed PER data:", billing_provider_record)
     
     # Write to CSV
     if billing_provider_data:
@@ -109,13 +110,20 @@ def parse_billing_provider_segment(filepath, output_csv):
             "Communication Number Qualifier (PER03)",
             "Communication Number (PER04)"
         ]
+
+        # create in memory file that gets returned
+        output = StringIO()
+        writer = csv.DictWriter(output, fieldnames=fieldnames)
+        writer.writeheader()
+        writer.writerows(billing_provider_data)
+        return output.getvalue()
         
-        with open(output_csv, 'w', newline='') as csvfile:
-            writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
-            writer.writeheader()
-            writer.writerows(billing_provider_data)
+        # with open(output_csv, 'w', newline='') as csvfile:
+        #     writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
+        #     writer.writeheader()
+        #     writer.writerows(billing_provider_data)
         
-        print(f"Billing provider section data written to {output_csv}")
+        # print(f"Billing provider section data written to {output_csv}")
 
 # Example usage
-parse_billing_provider_segment('generated_837_institutional_files/837_example_3.txt', 'generated_837_institutional_files/header_billing_provider.csv')
+# parse_billing_provider_segment('generated_837_institutional_files/837_example_3.txt', 'generated_837_institutional_files/header_billing_provider.csv')

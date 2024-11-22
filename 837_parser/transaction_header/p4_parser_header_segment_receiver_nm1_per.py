@@ -1,4 +1,5 @@
 import csv
+from io import StringIO
 
 #### LOOP 1000B for Receiver Name; NM1*40 and PER segments ####
 #### LOOP 1000B for Receiver Name; NM1*40 and PER segments ####
@@ -7,7 +8,7 @@ import csv
 
 # 40 = Receiver
 
-def parse_receiver_segment(filepath, output_csv):
+def parse_receiver_segment(filepath):
     # Open and read the file content
     with open(filepath, 'r') as file:
         content = file.read()
@@ -30,18 +31,18 @@ def parse_receiver_segment(filepath, output_csv):
         if segment.startswith('NM1*40'):
             # Split by '*' to get each element within the NM1*41 segment
             elements = segment.split('*')
-            print("NM1*40 segment found:", elements)
+            # print("NM1*40 segment found:", elements)
 
-            ## print what will be stripped NM101, NM102, NM103, NM108, NM109
-            print('Element1: ', elements[1].strip()) ## NM101
-            print('Element2: ', elements[2].strip()) ## NM102
-            print('Element3: ', elements[3].strip()) ## NM103
-            print('Element4: ', elements[4].strip())
-            print('Element5: ', elements[5].strip())
-            print('Element6: ', elements[6].strip())
-            print('Element7: ', elements[7].strip())
-            print('Element8: ', elements[8].strip()) ## NM108
-            print('Element9: ', elements[9].strip()) ## NM109
+            # ## print what will be stripped NM101, NM102, NM103, NM108, NM109
+            # print('Element1: ', elements[1].strip()) ## NM101
+            # print('Element2: ', elements[2].strip()) ## NM102
+            # print('Element3: ', elements[3].strip()) ## NM103
+            # print('Element4: ', elements[4].strip())
+            # print('Element5: ', elements[5].strip())
+            # print('Element6: ', elements[6].strip())
+            # print('Element7: ', elements[7].strip())
+            # print('Element8: ', elements[8].strip()) ## NM108
+            # print('Element9: ', elements[9].strip()) ## NM109
             
             # Collect values for NM1*40
             nm1_data = {
@@ -61,7 +62,7 @@ def parse_receiver_segment(filepath, output_csv):
         elif capture_next_per and segment.startswith('PER*'):
             # Split by '*' to get each element within the PER segment
             elements = segment.split('*')
-            print("PER segment found:", elements)
+            # print("PER segment found:", elements)
             
             # Update the last added entry in submitter_data with PER details
             submitter_data[-1].update({
@@ -90,15 +91,22 @@ def parse_receiver_segment(filepath, output_csv):
         "Communication Number Qualifier (PER03)",
         "Phone Number (PER04)"
     ]
-    
-    # Write the parsed data to a CSV file
-    with open(output_csv, 'w', newline='') as csvfile:
-        writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
-        writer.writeheader()
-        writer.writerows(submitter_data)
 
-    print(f"Receiver segment data written to {output_csv}")
+    # create in memory file that gets returned
+    output = StringIO()
+    writer = csv.DictWriter(output, fieldnames=fieldnames)
+    writer.writeheader()
+    writer.writerows(submitter_data)
+    return output.getvalue()
+    
+    # # Write the parsed data to a CSV file
+    # with open(output_csv, 'w', newline='') as csvfile:
+    #     writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
+    #     writer.writeheader()
+    #     writer.writerows(submitter_data)
+
+    # print(f"Receiver segment data written to {output_csv}")
 
 # Example usage
-parse_receiver_segment('generated_837_institutional_files/837_example_3.txt', 'generated_837_institutional_files/header_receiver.csv')
+# parse_receiver_segment('generated_837_institutional_files/837_example_3.txt', 'generated_837_institutional_files/header_receiver.csv')
 

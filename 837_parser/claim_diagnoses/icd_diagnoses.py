@@ -1,11 +1,9 @@
 import csv
 
-
 #### Loop 2300 for CLM: Specifically HI segments for diagnosis codes ####
 #### Loop 2300 for CLM: Specifically HI segments for diagnosis codes ####
 #### Loop 2300 for CLM: Specifically HI segments for diagnosis codes ####
 #### Loop 2300 for CLM: Specifically HI segments for diagnosis codes ####
-
 
 def parse_clm_diagnosis_segments(filepath, output_csv):
     # Open and read the file content
@@ -83,4 +81,4 @@ def parse_clm_diagnosis_segments(filepath, output_csv):
         print(f"Diagnosis data written to {output_csv}")
 
 # Example usage
-parse_clm_diagnosis_segments('generated_837_institutional_files/837_example_3.txt', 'generated_837_institutional_files/claim_diagnoses.csv')
+# parse_clm_diagnosis_segments('837_generator_output/837_example_0.txt', '837_parser_output/837_example_0_claim_diagnoses.csv')

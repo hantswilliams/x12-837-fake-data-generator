@@ -1,24 +1,43 @@
 # x12-837-fake-data-generator
 For generating realistic but fake 837 files for learning purposes in healthcare
 
+## The basic idea: 
+- (1) Being able to generate 'realish' profiles of patients with proceures and diagnosis 
+- (2) Push this data into a X12 837 form (.txt file) like what would be sent to a payer
+- (3) Then also have a parser to read this data into csv/tabular structure for analyses that would be useful for healthcare providers and payers
+- (4) Overall, this should promote training and understanding of the X12 837 form and how it is used in healthcare
+
 ## Viewing example data:
 1. Navigate to `837_generator_output` folder for the generated 837 files
 2. Navigate to `837_parser_output` folder for the parsed csv files of the generated 837 files
 
-## Creating your example data: 
+## Creating your example data with the CLI: 
 1. Clone the repo
 2. Create a virtual environment: 
     - `python3 -m venv venv`
     - `source venv/bin/activate`
 3. Install the requirements: 
     - `pip install -r requirements.txt`
-4. Run the script:
+4. Run the script with the cli:
+    - `python -m generator_837.cli.main -n 20` 
+        - this will generate 20 files with in the `837_generator_output` folder
+    - The two current parameters:
+        - `n` or `--number` - number of 837 files to generate
+        - `o` or `--output` - directory to save the 837 files
 
-## The basic idea: 
-- (1) Being able to generate 'realish' profiles of patients with proceures and diagnosis 
-- (2) Push this data into a X12 837 form (.txt file) like what would be sent to a payer
-- (3) Then also have a parser to read this data into csv/tabular structure for analyses that would be useful for healthcare providers and payers
-- (4) Overall, this should promote training and understanding of the X12 837 form and how it is used in healthcare
+## Creating your example data using the Flask Web App:
+1. Clone the repo
+2. Create a virtual environment: 
+    - `python3 -m venv venv`
+    - `source venv/bin/activate`
+3. Install the requirements:
+    - `pip install -r requirements.txt`
+4. Run the Flask app:
+    - `python generator_837/web/app.py`
+    - Then navigate to `http://localhost:5005/` or `0.0.0.0:5005` in your browser
+    - You can then select the number of 837 files to generate and download them
+5. If you dont want to do this, I have create a docker image that is deployed on GCP that you can use for testing found here: {X}
+
 
 ## Testing of generated 837 files:
 - For checking data structure/schema of generated 837 files from this repo with third party tools you can use:

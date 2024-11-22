@@ -2,15 +2,15 @@ import regex
 from random import randint, sample
 from faker import Faker
 
-from segments import (
+from .segments import (
     generate_isa_segment, generate_gs_segment, generate_st_segment,
     generate_bht_segment, generate_nm1_segment, generate_nm1_segment_subscriber, generate_per_segment,
     generate_hl_segment, generate_clm_segment, generate_dtp_segment,
     generate_hi_segment, generate_sv1_segment, generate_se_segment,
     generate_ge_segment, generate_iea_segment
 )
-from data_loader import load_codes, load_orgs, load_payers
-from utils import get_random_code
+from .data_loader import load_codes, load_orgs, load_payers
+from .utils import get_random_code
 
 def generate_837_transaction():
 
@@ -239,15 +239,15 @@ def generate_837_transaction():
     
     return "\n".join(segments)
 
-# Usage Example
-if __name__ == "__main__":
-    number_of_files = 10 # number of files to generate
-    for i in range(number_of_files):
-        example_output = generate_837_transaction()
-        with open(f"generator_837_output/837_example_{i}.txt", "w") as file:
-            file.write(example_output)
-        print(f"837 Example {i} has been generated successfully!")
-    print("All 837 Examples have been generated successfully!")
+# # Usage Example
+# if __name__ == "__main__":
+#     number_of_files = 10 # number of files to generate
+#     for i in range(number_of_files):
+#         example_output = generate_837_transaction()
+#         with open(f"generator_837_output/837_example_{i}.txt", "w") as file:
+#             file.write(example_output)
+#         print(f"837 Example {i} has been generated successfully!")
+#     print("All 837 Examples have been generated successfully!")
 
 
 

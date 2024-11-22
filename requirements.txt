@@ -1,3 +1,4 @@
 faker
 regex
 pandas
+flask

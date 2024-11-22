@@ -1,6 +1,6 @@
 import argparse
 import os
-from api.generator import generate_837_transaction
+from ..api.generator import generate_837_transaction
 
 def list_available_functions():
     """
@@ -21,8 +21,8 @@ def main():
         help="Number of 837 files to generate. Default is 1."
     )
     parser.add_argument(
-        "-o", "--output", type=str, default="837_generator_output",
-        help="Directory to save the generated 837 files. Default is '837_generator_output'."
+        "-o", "--output", type=str, default="generator_837_output",
+        help="Directory to save the generated 837 files. Default is 'generatory_837_output'."
     )
     parser.add_argument(
         "--functions", action="store_true",

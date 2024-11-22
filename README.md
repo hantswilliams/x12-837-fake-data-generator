@@ -1,7 +1,18 @@
 # x12-837-fake-data-generator
 For generating realistic but fake 837 files for learning purposes in healthcare
 
-## Creating your data: 
+## Viewing example data:
+1. Navigate to `837_generator_output` folder for the generated 837 files
+2. Navigate to `837_parser_output` folder for the parsed csv files of the generated 837 files
+
+## Creating your example data: 
+1. Clone the repo
+2. Create a virtual environment: 
+    - `python3 -m venv venv`
+    - `source venv/bin/activate`
+3. Install the requirements: 
+    - `pip install -r requirements.txt`
+4. Run the script:
 
 ## The basic idea: 
 - (1) Being able to generate 'realish' profiles of patients with proceures and diagnosis 

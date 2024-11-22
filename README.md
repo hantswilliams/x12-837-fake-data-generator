@@ -1,6 +1,43 @@
 # x12-837-fake-data-generator
 For generating realistic but fake 837 files for learning purposes in healthcare
 
+## Project Hierarchy
+- **API**: *core logic for generating 837 files*
+- **CLI**: *command-line interface for generating 837 files*
+- **Web App**: *Flask web app for generating 837 files*
+
+```plaintext
+x12-837-fake-data-generator/
+│
+├── 837_generator/                     # Core directory for the generator code
+│   ├── api/                           # API logic for generating 837 files
+│   │   ├── generator.py               # Generates X12 837 transactions
+│   │   ├── segments.py                # Functions for generating X12 segments
+|   |   ├── utils.py                   # Utility functions
+|   |   |── data_loader.py             # Functions for loading reference data
+|   |   |── reference_data/            # Reference data (e.g., ICD codes, payer data)
+|   |   |   ├── icd10.csv              # ICD-10 codes
+|   |   |   ├── cpt4.csv               # CPT codes
+|   |   |   ├── payers.csv             # Payer data
+|   |   |   └── npi_orgs.csv           # NPI and organization data
+│   │   └── __init__.py
+│   ├── cli/                           # Command-line interface (CLI) for the generator
+│   │   ├── main.py                    # CLI entry point
+│   │   └── __init__.py
+│   ├── web/                           # Flask web app for generating files
+│   │   ├── app.py                     # Web app entry point
+│   │   ├── templates/
+│   │   │   └── index.html             # Web app front-end
+│   │   └── __init__.py
+│   └── __init__.py
+│
+├── 837_generator_output/              # Default output directory for generated files
+├── .gitignore                         # Files and directories to ignore in Git
+├── README.md                          # Project documentation
+├── requirements.txt                   # Python dependencies
+└── venv/                              # Virtual environment (not included in repo)
+```
+
 ## The basic idea: 
 - (1) Being able to generate 'realish' profiles of patients with proceures and diagnosis 
 - (2) Push this data into a X12 837 form (.txt file) like what would be sent to a payer
@@ -36,7 +73,8 @@ For generating realistic but fake 837 files for learning purposes in healthcare
     - `python generator_837/web/app.py`
     - Then navigate to `http://localhost:5005/` or `0.0.0.0:5005` in your browser
     - You can then select the number of 837 files to generate and download them
-5. If you dont want to do this, I have create a docker image that is deployed on GCP that you can use for testing found here: {X}
+5. If you dont want to do this, I have create a docker image that is deployed on GCP that you can use for testing found here:
+    - [837 Generator Web App: https://form837-447631255961.us-central1.run.app ](https://form837-447631255961.us-central1.run.app)
 
 
 ## Testing of generated 837 files:

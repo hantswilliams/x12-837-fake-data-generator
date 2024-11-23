@@ -7,10 +7,18 @@
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body class="bg-gray-100">
-    <div class="min-h-screen flex flex-col items-center justify-center space-y-12">
+<body class="bg-gray-100 flex flex-col min-h-screen">
+    <!-- Main Content -->
+    <div class="flex-grow flex flex-col items-center justify-center space-y-10 mb-6">
+
+        <!-- Header Section with Description -->
+        <div class="text-center">
+            <h1 class="mt-4 text-3xl font-bold text-gray-700">Fake 837 Generator and Parser</h1>
+            <p class="mt-2 text-lg text-gray-500">Easily generate and parse X12 837 files for testing and learning purposes</p>
+        </div>
+
         <!-- Generator Section -->
-        <div class="bg-white p-8 rounded shadow-md w-96">
+        <div class="bg-white p-4 rounded shadow-md w-96">
             <h1 class="text-2xl font-bold text-center mb-6">837 File Generator</h1>
             <form id="generateForm" action="/generate" method="POST">
                 <div class="mb-4">
@@ -19,25 +27,46 @@
                            class="w-full px-4 py-2 border rounded focus:outline-none focus:ring focus:ring-blue-200" />
                 </div>
                 <button type="submit" 
-                        class="w-full bg-blue-500 text-white py-2 rounded hover:bg-blue-600 focus:outline-none focus:ring focus:ring-blue-300">
+                        class="w-full bg-red-800 text-white py-2 rounded hover:bg-red-600 focus:outline-none focus:ring focus:ring-red-300">
                     Generate and Download
                 </button>
             </form>
         </div>
 
         <!-- Parser Section -->
-        <div class="bg-white p-8 rounded shadow-md w-96">
+        <div class="bg-white p-4 rounded shadow-md w-96">
             <h1 class="text-2xl font-bold text-center mb-6">837 File Parser</h1>
             <form action="/parse" method="post" enctype="multipart/form-data">
                 <label class="block mb-2 font-semibold">Upload 837 Files (.txt):</label>
                 <input type="file" name="file" accept=".txt" 
                        class="block w-full mb-4 px-4 py-2 border rounded focus:outline-none focus:ring focus:ring-blue-200">
                 <button type="submit" 
-                        class="w-full bg-green-500 text-white py-2 rounded hover:bg-green-600 focus:outline-none focus:ring focus:ring-green-300">
+                        class="w-full bg-red-800 text-white py-2 rounded hover:bg-red-600 focus:outline-none focus:ring focus:ring-red-300">
                     Parse and Download
                 </button>
             </form>
         </div>
     </div>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white py-6">
+        <div class="container mx-auto flex justify-between items-center px-6">
+            <!-- Logo Section -->
+            <div class="flex items-center space-x-4">
+                <!-- <img src="/static/logo_med.svg" alt="Logo" class="h-16 w-16"> -->
+                <div>
+                    <p class="font-bold">Fake 837 Generator and Parser</p>
+                    <p class="text-sm">A tool for learning and testing healthcare claims.</p>
+                    <!-- link for /api documentation -->
+                    <a href="/api" class="text-sm underline">API Documentation</a>
+                </div>
+            </div>
+            <!-- Additional Info -->
+            <div class="text-right">
+                <p>&copy; 2024 Hants Williams</p>
+                <p>All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
 </body>
 </html>

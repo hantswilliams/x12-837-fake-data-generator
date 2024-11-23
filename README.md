@@ -135,19 +135,27 @@ x12-837-fake-data-generator/
 - `/parser/parse` - POST request to parse uploaded 837 files
 - Example usage:
 
-# Post request for generating 837 files:
+# GET request for generating a single fake 837 file text file:
 
 ```bash
-curl -X POST "http://localhost:5007/generator/generate" \
+curl -X GET "http://localhost:5007/api/generate/" --output api_single_fake_claim.txt
+```
+
+Expected Result: single_fake_claim.txt is downloaded containing one valid 837 claim.
+
+# POST request for generating mulitple fake 837 files that are returned in a .zip file:
+
+```bash
+curl -X POST "http://localhost:5007/api/generate/" \
      -H "Content-Type: application/json" \
-     -d '{"number": 5}' --output generated_web_837.zip
+     -d '{"number": 5}' --output api_multiple_fake_claims.zip
 ```
 
 # Post request for parsing 837 files:
 
 ```bash
-curl -X POST "http://localhost:5007/parser/parse" \
-     -F "file=@837_example_1.txt" --output parsed_csvs.zip
+curl -X POST "http://localhost:5007/api/parse/" \
+     -F "file=@generator_837_output/837_example_10.txt" --output api_parsed_837_files.zip
 ```
 
 

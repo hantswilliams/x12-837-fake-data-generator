@@ -1,0 +1,4 @@
+CLM ID,Service Line Number,Product or Service ID (SV101),Monetary Amount (SV102),Unit or Basis for Measurement Code (SV103),Quantity (SV104),Diagnosis Code Pointer,Date Time Qualifier (DTP01),Service Date (DTP03),Reference Identification Qualifier (REF01),Reference Identification (REF02)
+4742333269,1,HC:93528,75,UN,1,"[1, 4]",472,20180428,6R,142671
+4742333269,2,HC:27503,77,UN,1,"[2, 5, 6]",472,20180428,6R,142671
+4742333269,3,HC:57305,107,UN,1,"[1, 2, 3, 4, 5, 6]",472,20180428,6R,142671

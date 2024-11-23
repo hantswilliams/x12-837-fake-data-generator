@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>837 Generator and Parser</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100">
+    <div class="min-h-screen flex flex-col items-center justify-center space-y-12">
+        <!-- Generator Section -->
+        <div class="bg-white p-8 rounded shadow-md w-96">
+            <h1 class="text-2xl font-bold text-center mb-6">837 File Generator</h1>
+            <form id="generateForm" action="/generate" method="POST">
+                <div class="mb-4">
+                    <label for="number" class="block text-gray-700">Number of Files:</label>
+                    <input type="number" id="number" name="number" min="1" value="1" 
+                           class="w-full px-4 py-2 border rounded focus:outline-none focus:ring focus:ring-blue-200" />
+                </div>
+                <button type="submit" 
+                        class="w-full bg-blue-500 text-white py-2 rounded hover:bg-blue-600 focus:outline-none focus:ring focus:ring-blue-300">
+                    Generate and Download
+                </button>
+            </form>
+        </div>
+
+        <!-- Parser Section -->
+        <div class="bg-white p-8 rounded shadow-md w-96">
+            <h1 class="text-2xl font-bold text-center mb-6">837 File Parser</h1>
+            <form action="/parse" method="post" enctype="multipart/form-data">
+                <label class="block mb-2 font-semibold">Upload 837 Files (.txt):</label>
+                <input type="file" name="files" multiple accept=".txt" 
+                       class="block w-full mb-4 px-4 py-2 border rounded focus:outline-none focus:ring focus:ring-blue-200">
+                <button type="submit" 
+                        class="w-full bg-green-500 text-white py-2 rounded hover:bg-green-600 focus:outline-none focus:ring focus:ring-green-300">
+                    Parse and Download
+                </button>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

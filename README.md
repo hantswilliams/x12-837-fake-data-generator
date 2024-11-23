@@ -131,6 +131,7 @@ x12-837-fake-data-generator/
 5. If you dont want to do this, I have create a docker image that is deployed on GCP that you can use for testing found here:
     - [837 Generator Web App: https://form837-447631255961.us-central1.run.app ](https://form837-447631255961.us-central1.run.app)
 ### Web API Endpoints:
+- `/api` - Documentation for the API
 - `/api/generate` - GET or POST request to generate 837 files
 - `/api/parse` - POST request to parse uploaded 837 files
 - Example usage:
@@ -138,7 +139,7 @@ x12-837-fake-data-generator/
 # GET request for generating a single fake 837 file text file:
 
 ```bash
-curl -X GET "http://localhost:5007/api/generate/" --output api_output/api_single_fake_claim.txt
+curl -X GET "http://localhost:5007/api/generate/" --output api_output/api_single_fake_claim_2.txt
 ```
 
 Expected Result: single_fake_claim.txt is downloaded containing one valid 837 claim.
@@ -148,14 +149,14 @@ Expected Result: single_fake_claim.txt is downloaded containing one valid 837 cl
 ```bash
 curl -X POST "http://localhost:5007/api/generate/" \
      -H "Content-Type: application/json" \
-     -d '{"number": 5}' --output api_output/api_multiple_fake_claims.zip
+     -d '{"number": 5}' --output api_output/api_multiple_fake_claims_2.zip
 ```
 
 # Post request for parsing 837 files:
 
 ```bash
 curl -X POST "http://localhost:5007/api/parse/" \
-     -F "file=@api_output/api_single_fake_claim.txt" --output api_output/api_parsed_837_files.zip
+     -F "file=@api_output/api_single_fake_claim.txt" --output api_output/api_parsed_837_files_2.zip
 ```
 
 

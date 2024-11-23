@@ -116,6 +116,7 @@ x12-837-fake-data-generator/
 ### Features:
 - Generate X12 837 files with custom inputs and download them as a ZIP.
 - Upload X12 837 files, parse them, and download the results as a ZIP of CSV files.
+- API endpoints for generating and parsing X12 837 files.
 ### Instructions:
 1. Clone the repo
 2. Create a virtual environment: 
@@ -129,6 +130,25 @@ x12-837-fake-data-generator/
     - You can then select the number of 837 files to generate and download them
 5. If you dont want to do this, I have create a docker image that is deployed on GCP that you can use for testing found here:
     - [837 Generator Web App: https://form837-447631255961.us-central1.run.app ](https://form837-447631255961.us-central1.run.app)
+### Web API Endpoints:
+- `/generator/generate` - POST request to generate 837 files
+- `/parser/parse` - POST request to parse uploaded 837 files
+- Example usage:
+
+# Post request for generating 837 files:
+
+```bash
+curl -X POST "http://localhost:5007/generator/generate" \
+     -H "Content-Type: application/json" \
+     -d '{"number": 5}' --output generated_web_837.zip
+```
+
+# Post request for parsing 837 files:
+
+```bash
+curl -X POST "http://localhost:5007/parser/parse" \
+     -F "file=@837_example_1.txt" --output parsed_csvs.zip
+```
 
 
 # Testing of generated 837 files:

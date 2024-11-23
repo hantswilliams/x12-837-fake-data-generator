@@ -2,3 +2,4 @@ faker
 regex
 pandas
 flask
+flask-restx

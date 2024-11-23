@@ -10,7 +10,7 @@ api = Api(
     title="X12 837 Generator and Parser",
     version="1.0",
     description="API for generating and parsing X12 837 files",
-    doc="/api-docs"  # Set the documentation to a non-root path
+    doc="/api"  # Set the documentation to a non-root path
 )
 
 # Define API namespaces

@@ -110,7 +110,7 @@ class ParseAPI(Resource):
     def post(self):
         """
         RESTful API for parsing a single X12 837 file.
-        Parses an uploaded file and returns the parsed data as a ZIP file.
+        Parses an uploaded 837 text file and returns the parsed data as a ZIP file.
         """
         try:
             # Ensure a file is uploaded
@@ -143,14 +143,14 @@ class ParseAPI(Resource):
             print(f"Error during parsing: {str(e)}")
             return {"error": str(e)}, 500
 
-    @api.response(200, "Parser is available and ready.")
-    def get(self):
-        """
-        Test the parser API.
-        Returns a success message to confirm that the endpoint is reachable.
-        """
-        try:
-            return {"message": "Parser API is up and running."}, 200
-        except Exception as e:
-            print(f"Error during parser testing: {str(e)}")
-            return {"error": str(e)}, 500
+    # @api.response(200, "Parser is available and ready.")
+    # def get(self):
+    #     """
+    #     Test the parser API.
+    #     Returns a success message to confirm that the endpoint is reachable.
+    #     """
+    #     try:
+    #         return {"message": "Parser API is up and running."}, 200
+    #     except Exception as e:
+    #         print(f"Error during parser testing: {str(e)}")
+    #         return {"error": str(e)}, 500

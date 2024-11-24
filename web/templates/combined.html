@@ -17,47 +17,56 @@
             <p class="mt-2 text-lg text-gray-500">Easily generate and parse X12 837 files for testing and learning purposes</p>
         </div>
 
-        <!-- Generator Section -->
-        <div class="bg-white p-4 rounded shadow-md w-96">
-            <h1 class="text-2xl font-bold text-center mb-6">837 File Generator</h1>
-            <form id="generateForm" action="/generate" method="POST">
-                <div class="mb-4">
-                    <label for="number" class="block text-gray-700">Number of Files:</label>
-                    <input type="number" id="number" name="number" min="1" value="1" 
-                           class="w-full px-4 py-2 border rounded focus:outline-none focus:ring focus:ring-blue-200" />
-                </div>
-                <button type="submit" 
-                        class="w-full bg-red-800 text-white py-2 rounded hover:bg-red-600 focus:outline-none focus:ring focus:ring-red-300">
-                    Generate and Download
-                </button>
-            </form>
-            <h3 class="text-center mt-4 text-sm text-gray-500">The generated file or files will be .txt files that are contained
-                in a .zip file, just as you might encounter in the real world. If you then want to first review the general structure of the 837 files, I recommend that you use a online tool like
-                <a href="https://datainsight.health/edi/viewer/" class="underline">Data Insight EDI Viewer</a> or the <a href="https://www.stedi.com/edi/inspector" class="underline">STEDI Viewer</a>
-                where you can copy the body of the .txt file into either viewer to see the structure of the 837 file. 
-            </h3>
-        </div>
+        <!-- Forms Section -->
+        <!-- Forms Section -->
+        <div class="flex flex-col md:flex-row md:space-x-10 items-stretch w-full max-w-4xl">
+            <!-- Generator Section -->
+            <div class="bg-white p-4 rounded shadow-md w-full md:w-1/2 flex flex-col">
+                <h1 class="text-2xl font-bold text-center mb-6">837 File Generator</h1>
+                <form id="generateForm" action="/generate" method="POST" class="flex-grow">
+                    <div class="mb-4">
+                        <label for="number" class="block text-gray-700">Number of Files:</label>
+                        <input type="number" id="number" name="number" min="1" value="1" 
+                            class="w-full px-4 py-2 border rounded focus:outline-none focus:ring focus:ring-blue-200" />
+                    </div>
+                    <button type="submit" 
+                            class="w-full bg-red-800 text-white py-2 rounded hover:bg-red-600 focus:outline-none focus:ring focus:ring-red-300">
+                        Generate and Download
+                    </button>
+                </form>
+                <h3 class="text-center mt-4 text-sm text-gray-500">
+                    The generated file or files will be .txt files that are contained in a .zip file, just as you might encounter in the real world. 
+                    If you then want to first review the general structure of the 837 files, I recommend that you use a tool like 
+                    <a href="https://datainsight.health/edi/viewer/" class="underline">Data Insight EDI Viewer</a> or 
+                    <a href="https://www.stedi.com/edi/inspector" class="underline">STEDI Viewer</a>.
+                </h3>
+            </div>
 
-        <!-- Parser Section -->
-        <div class="bg-white p-4 rounded shadow-md w-96">
-            <h1 class="text-2xl font-bold text-center mb-6">837 File Parser</h1>
-            <form action="/parse" method="post" enctype="multipart/form-data">
-                <label class="block mb-2 font-semibold">Upload 837 Files (.txt):</label>
-                <input type="file" name="file" accept=".txt" 
-                       class="block w-full mb-4 px-4 py-2 border rounded focus:outline-none focus:ring focus:ring-blue-200">
-                <button type="submit" 
-                        class="w-full bg-red-800 text-white py-2 rounded hover:bg-red-600 focus:outline-none focus:ring focus:ring-red-300">
-                    Parse and Download
-                </button>
-            </form>
-            <h3 class="text-center mt-4 text-sm text-gray-500">The parsed output will be three separate .csv files that are contained
-                in a .zip file. You can use any spreadsheet software, or data languages like Python, R, SAS, STRATA, etc...to open the .csv files and review the parsed data.
-                The three .csv files will contain the following data: 1. Header Information (meta data), 2. Service Line Information (procedures), and 3. Diagnostic Information (diagnoses).   
+            <!-- Parser Section -->
+            <div class="bg-white p-4 rounded shadow-md w-full md:w-1/2 flex flex-col">
+                <h1 class="text-2xl font-bold text-center mb-6">837 File Parser</h1>
+                <form action="/parse" method="post" enctype="multipart/form-data" class="flex-grow">
+                    <label class="block mb-2 font-semibold">Upload 837 Files (.txt):</label>
+                    <input type="file" name="file" accept=".txt" 
+                        class="block w-full mb-4 px-4 py-2 border rounded focus:outline-none focus:ring focus:ring-blue-200">
+                    <button type="submit" 
+                            class="w-full bg-red-800 text-white py-2 rounded hover:bg-red-600 focus:outline-none focus:ring focus:ring-red-300">
+                        Parse and Download
+                    </button>
+                </form>
+                <h3 class="text-center mt-4 text-sm text-gray-500">
+                    The parsed output will be three separate .csv files contained in a .zip file. You can use any spreadsheet software 
+                    or programming languages like Python, R, SAS, etc., to open the .csv files. There will be x3 csv files generated 
+                    for each 837 text file.  
+                </h3>
+            </div>
         </div>
     </div>
 
     <!-- Footer -->
-    <footer class="bg-gray-800 text-white py-6">
+    <div class="border-b-2 border-gray-500"></div>
+    <footer class="bg-gray-200 text-black py-6">
+        <!-- add a solid line  -->
         <div class="container mx-auto flex justify-between items-center px-6">
             <!-- Logo Section -->
             <div class="flex items-center space-x-4">
@@ -67,6 +76,12 @@
                     <p class="text-sm">A tool for learning and testing healthcare claims.</p>
                     <!-- link for /api documentation -->
                     <a href="/api" class="text-sm underline">API Documentation</a>
+                    <br />
+                    <!-- link for github with logo -->
+                    <a href="https://github.com/hantswilliams/x12-837-fake-data-generator" class="text-sm underline">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/9/91/Octicons-mark-github.svg" alt="GitHub Logo" class="h-6 w-6 inline">
+                        GitHub
+                    </a>
                 </div>
             </div>
             <!-- Additional Info -->

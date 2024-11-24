@@ -29,7 +29,8 @@ parse_model = api.model('ParseResponse', {
 })
 
 # REST API Routes
-@generator_ns.route("/")
+@generator_ns.route("/", defaults={'count': None}, methods=["GET", "POST"])
+@generator_ns.route("/<int:count>", methods=["GET"])
 class GenerateAPI(Resource):
     @api.expect(generate_model, validate=True)
     @api.response(200, "Files generated successfully")
@@ -65,30 +66,40 @@ class GenerateAPI(Resource):
             return {"error": str(e)}, 500
 
     @api.response(200, "Fake claim generated successfully")
+    @api.response(400, "Invalid input")
     @api.response(500, "Internal server error")
-    def get(self):
+    @api.doc(params={'count': 'Number of fake claims to generate (default is 1, max is 25)'})
+    def get(self, count=None):
         """
-        RESTful API for generating a single X12 837 file.
-        Generates one fake claim and returns it as a plain text file.
+        RESTful API for generating a single or multiple X12 837 files.
+        Generates the requested number of claims (default 1) and returns them as text files.
         """
         try:
-            # Generate a single fake claim
-            fake_claim = generate_837_transaction()
+            # Use `count` from the route or default to 1
+            num_claims = int(count) if count else 1
+            if not (1 <= num_claims <= 25):
+                return {"error": "Number must be between 1 and 25."}, 400
 
-            # Debugging: Ensure the generated claim is valid
-            print(f"Generated Fake Claim:\n{fake_claim}")
+            # Generate the requested number of fake claims
+            memory_file = io.BytesIO()
+            with zipfile.ZipFile(memory_file, "w") as zf:
+                for i in range(num_claims):
+                    fake_claim = generate_837_transaction()
+                    zf.writestr(f"fake_claim_{i + 1}.txt", fake_claim)
 
-            # Return the fake claim as a text file
+            memory_file.seek(0)
             return send_file(
-                io.BytesIO(fake_claim.encode("utf-8")),
-                mimetype="text/plain",
+                memory_file,
+                mimetype="application/zip",
                 as_attachment=True,
-                download_name="fake_837_claim.txt"
+                download_name=f"{num_claims}_fake_claims.zip"
             )
 
         except Exception as e:
-            print(f"Error during single claim generation: {str(e)}")
+            print(f"Error during fake claim generation: {str(e)}")
             return {"error": str(e)}, 500
+
+
 
 
 @parser_ns.route("/")

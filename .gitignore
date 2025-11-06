@@ -10,6 +10,12 @@ __pycache__/
 # C extensions
 *.so
 
+# Claude AI files
+.claude
+
+# Manuscript folder
+manuscript/
+
 # Distribution / packaging
 .Python
 build/

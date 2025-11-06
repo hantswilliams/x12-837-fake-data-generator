@@ -1,3 +1,5 @@
+[![DOI](https://zenodo.org/badge/884438476.svg)](https://doi.org/10.5281/zenodo.17546476)
+
 # x12-837-fake-data-generator
 For generating realistic but fake 837 files for learning purposes in healthcare, as well as parsing them into structured CSV files.
 

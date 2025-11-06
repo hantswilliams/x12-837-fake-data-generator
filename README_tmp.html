@@ -1,0 +1,637 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>README.md</title>
+    <meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+    
+<style>
+/* https://github.com/microsoft/vscode/blob/master/extensions/markdown-language-features/media/markdown.css */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+body {
+	font-family: var(--vscode-markdown-font-family, -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif);
+	font-size: var(--vscode-markdown-font-size, 14px);
+	padding: 0 26px;
+	line-height: var(--vscode-markdown-line-height, 22px);
+	word-wrap: break-word;
+}
+
+html,footer,header{
+	font-family: var(--vscode-markdown-font-family, -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif);
+	font-size: var(--vscode-markdown-font-size, 14px);
+}
+
+#code-csp-warning {
+	position: fixed;
+	top: 0;
+	right: 0;
+	color: white;
+	margin: 16px;
+	text-align: center;
+	font-size: 12px;
+	font-family: sans-serif;
+	background-color:#444444;
+	cursor: pointer;
+	padding: 6px;
+	box-shadow: 1px 1px 1px rgba(0,0,0,.25);
+}
+
+#code-csp-warning:hover {
+	text-decoration: none;
+	background-color:#007acc;
+	box-shadow: 2px 2px 2px rgba(0,0,0,.25);
+}
+
+body.scrollBeyondLastLine {
+	margin-bottom: calc(100vh - 22px);
+}
+
+body.showEditorSelection .code-line {
+	position: relative;
+}
+
+body.showEditorSelection .code-active-line:before,
+body.showEditorSelection .code-line:hover:before {
+	content: "";
+	display: block;
+	position: absolute;
+	top: 0;
+	left: -12px;
+	height: 100%;
+}
+
+body.showEditorSelection li.code-active-line:before,
+body.showEditorSelection li.code-line:hover:before {
+	left: -30px;
+}
+
+.vscode-light.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.15);
+}
+
+.vscode-light.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.40);
+}
+
+.vscode-light.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-dark.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.4);
+}
+
+.vscode-dark.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.60);
+}
+
+.vscode-dark.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-high-contrast.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 160, 0, 0.7);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 160, 0, 1);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+img {
+	max-width: 100%;
+	max-height: 100%;
+}
+
+a {
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+a:focus,
+input:focus,
+select:focus,
+textarea:focus {
+	outline: 1px solid -webkit-focus-ring-color;
+	outline-offset: -1px;
+}
+
+hr {
+	border: 0;
+	height: 2px;
+	border-bottom: 2px solid;
+}
+
+h1 {
+	padding-bottom: 0.3em;
+	line-height: 1.2;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+}
+
+h1, h2, h3 {
+	font-weight: normal;
+}
+
+table {
+	border-collapse: collapse;
+}
+
+table > thead > tr > th {
+	text-align: left;
+	border-bottom: 1px solid;
+}
+
+table > thead > tr > th,
+table > thead > tr > td,
+table > tbody > tr > th,
+table > tbody > tr > td {
+	padding: 5px 10px;
+}
+
+table > tbody > tr + tr > td {
+	border-top: 1px solid;
+}
+
+blockquote {
+	margin: 0 7px 0 5px;
+	padding: 0 16px 0 10px;
+	border-left-width: 5px;
+	border-left-style: solid;
+}
+
+code {
+	font-family: Menlo, Monaco, Consolas, "Droid Sans Mono", "Courier New", monospace, "Droid Sans Fallback";
+	font-size: 1em;
+	line-height: 1.357em;
+}
+
+body.wordWrap pre {
+	white-space: pre-wrap;
+}
+
+pre:not(.hljs),
+pre.hljs code > div {
+	padding: 16px;
+	border-radius: 3px;
+	overflow: auto;
+}
+
+pre code {
+	color: var(--vscode-editor-foreground);
+	tab-size: 4;
+}
+
+/** Theming */
+
+.vscode-light pre {
+	background-color: rgba(220, 220, 220, 0.4);
+}
+
+.vscode-dark pre {
+	background-color: rgba(10, 10, 10, 0.4);
+}
+
+.vscode-high-contrast pre {
+	background-color: rgb(0, 0, 0);
+}
+
+.vscode-high-contrast h1 {
+	border-color: rgb(0, 0, 0);
+}
+
+.vscode-light table > thead > tr > th {
+	border-color: rgba(0, 0, 0, 0.69);
+}
+
+.vscode-dark table > thead > tr > th {
+	border-color: rgba(255, 255, 255, 0.69);
+}
+
+.vscode-light h1,
+.vscode-light hr,
+.vscode-light table > tbody > tr + tr > td {
+	border-color: rgba(0, 0, 0, 0.18);
+}
+
+.vscode-dark h1,
+.vscode-dark hr,
+.vscode-dark table > tbody > tr + tr > td {
+	border-color: rgba(255, 255, 255, 0.18);
+}
+
+</style>
+
+<style>
+/* Tomorrow Theme */
+/* http://jmblog.github.com/color-themes-for-google-code-highlightjs */
+/* Original theme - https://github.com/chriskempson/tomorrow-theme */
+
+/* Tomorrow Comment */
+.hljs-comment,
+.hljs-quote {
+	color: #8e908c;
+}
+
+/* Tomorrow Red */
+.hljs-variable,
+.hljs-template-variable,
+.hljs-tag,
+.hljs-name,
+.hljs-selector-id,
+.hljs-selector-class,
+.hljs-regexp,
+.hljs-deletion {
+	color: #c82829;
+}
+
+/* Tomorrow Orange */
+.hljs-number,
+.hljs-built_in,
+.hljs-builtin-name,
+.hljs-literal,
+.hljs-type,
+.hljs-params,
+.hljs-meta,
+.hljs-link {
+	color: #f5871f;
+}
+
+/* Tomorrow Yellow */
+.hljs-attribute {
+	color: #eab700;
+}
+
+/* Tomorrow Green */
+.hljs-string,
+.hljs-symbol,
+.hljs-bullet,
+.hljs-addition {
+	color: #718c00;
+}
+
+/* Tomorrow Blue */
+.hljs-title,
+.hljs-section {
+	color: #4271ae;
+}
+
+/* Tomorrow Purple */
+.hljs-keyword,
+.hljs-selector-tag {
+	color: #8959a8;
+}
+
+.hljs {
+	display: block;
+	overflow-x: auto;
+	color: #4d4d4c;
+	padding: 0.5em;
+}
+
+.hljs-emphasis {
+	font-style: italic;
+}
+
+.hljs-strong {
+	font-weight: bold;
+}
+</style>
+
+<style>
+/*
+ * Custom MD PDF CSS
+ */
+html,footer,header{
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif, "Meiryo";
+
+ }
+body {
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif, "Meiryo";
+	padding: 0 12px;
+}
+
+pre {
+	background-color: #f8f8f8;
+	border: 1px solid #cccccc;
+	border-radius: 3px;
+	overflow-x: auto;
+	white-space: pre-wrap;
+	overflow-wrap: break-word;
+}
+
+pre:not(.hljs) {
+	padding: 23px;
+	line-height: 19px;
+}
+
+blockquote {
+	background: rgba(127, 127, 127, 0.1);
+	border-color: rgba(0, 122, 204, 0.5);
+}
+
+.emoji {
+	height: 1.4em;
+}
+
+code {
+	font-size: 14px;
+	line-height: 19px;
+}
+
+/* for inline code */
+:not(pre):not(.hljs) > code {
+	color: #C9AE75; /* Change the old color so it seems less like an error */
+	font-size: inherit;
+}
+
+/* Page Break : use <div class="page"/> to insert page break
+-------------------------------------------------------- */
+.page {
+	page-break-after: always;
+}
+
+</style>
+<link rel="stylesheet" href="file:///Users/hantswilliams/Development/python/x12-837-fake-data-generator/R%3A%5C2.Travail%5C1.Enseignement%5CCours%5C_1.Outils%5C2.Developpement%5C1.SCSS%5Cmain.css" type="text/css"><link rel="stylesheet" href="file:///Users/hantswilliams/Development/python/x12-837-fake-data-generator/D%3A%5Crdaros%5CCours%5C_1.Outils%5C2.Developpement%5C1.SCSS%5Cmain.css" type="text/css">
+</head>
+
+<body>
+    <p><a href="https://doi.org/10.5281/zenodo.17546476"><img src="https://zenodo.org/badge/884438476.svg" alt="DOI"></a></p>
+<h1 id="x12-837-fake-data-generator">x12-837-fake-data-generator</h1>
+<p>For generating realistic but fake 837 files for learning purposes in healthcare, as well as parsing them into structured CSV files.</p>
+<h2 id="project-hierarchy">Project Hierarchy</h2>
+<ul>
+<li>Generator and Parsers:
+<ul>
+<li><strong>Generator</strong>: <em>Generates 837 files with realistic but fake data</em></li>
+<li><strong>Parser</strong>: <em>Parses 837 files into structured CSVs for analysis</em></li>
+<li>The generator and parse each has:
+<ul>
+<li><strong>API</strong>: <em>Core logic for generating or parsing</em></li>
+<li><strong>CLI</strong>: <em>Command-line interface for generating or parsing</em></li>
+<li><strong>Web App</strong>: <em>Flask web app for generating pr parsing 837 files</em></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>Web</strong>: <em>Combined web app for generation and parsing</em></li>
+</ul>
+<pre class="hljs"><code><div>x12-837-fake-data-generator/
+│
+├── generator_837/                     # Core directory for the generator code
+│   ├── api/                           # API logic for generating 837 files
+│   │   ├── generator.py               # Generates X12 837 transactions
+│   │   ├── segments.py                # Functions for generating X12 segments
+│   │   ├── utils.py                   # Utility functions
+│   │   ├── data_loader.py             # Functions for loading reference data
+│   │   ├── reference_data/            # Reference data (e.g., ICD codes, payer data)
+│   │   │   ├── icd10.csv              # ICD-10 codes
+│   │   │   ├── cpt4.csv               # CPT codes
+│   │   │   ├── payers.csv             # Payer data
+│   │   │   └── npi_orgs.csv           # NPI and organization data
+│   │   └── __init__.py
+│   ├── cli/                           # Command-line interface (CLI) for the generator
+│   │   ├── main.py                    # CLI entry point for generating files
+│   │   └── __init__.py
+│   ├── web/                           # Flask web app for generating files
+│   │   ├── app.py                     # Web app entry point for generation
+│   │   ├── templates/
+│   │   │   └── index.html             # Web app front-end for generation
+│   │   └── __init__.py
+│   └── __init__.py
+│
+├── parser_837/                        # Core directory for the parser code
+│   ├── api/                           # API logic for parsing 837 files
+│   │   ├── parser.py                  # Main parser logic
+│   │   ├── claim_services/            # Service-line-specific parsing
+│   │   │   ├── cpt_hcpcs.py           # CPT/HCPCS parsing logic
+│   │   │   └── __init__.py
+│   │   ├── claim_diagnoses/           # Diagnosis-specific parsing
+│   │   │   ├── icd_diagnoses.py       # ICD parsing logic
+│   │   │   └── __init__.py
+│   │   ├── transaction_header/        # Header parsing
+│   │   │   ├── header.py              # Main header parser logic
+│   │   │   ├── ...                    # Individual header parsers
+│   │   │   └── __init__.py
+│   │   └── __init__.py
+│   ├── cli/                           # Command-line interface (CLI) for parsing
+│   │   ├── main.py                    # CLI entry point for parsing files
+│   │   └── __init__.py
+│   ├── web/                           # Flask web app for parsing files
+│   │   ├── app.py                     # Web app entry point for parsing
+│   │   ├── templates/
+│   │   │   └── index.html             # Web app front-end for parsing
+│   │   └── __init__.py
+│   └── __init__.py
+│
+├── web/                               # Combined web app for generation and parsing
+│   ├── app.py                         # Unified web app entry point
+│   ├── templates/
+│   │   └── index.html                 # Combined front-end for generation and parsing
+│   └── __init__.py
+│
+├── generator_837_output/              # Default output directory for generated files
+├── parser_837_output/                 # Default output directory for parsed files
+├── .gitignore                         # Files and directories to ignore in Git
+├── README.md                          # Project documentation
+├── requirements.txt                   # Python dependencies
+└── venv/                              # Virtual environment (not included in repo)
+</div></code></pre>
+<h2 id="the-basic-idea">The basic idea:</h2>
+<ul>
+<li>(1) Being able to generate 'realish' profiles of patients with proceures and diagnosis</li>
+<li>(2) Push this data into a X12 837 form (.txt file) like what would be sent to a payer</li>
+<li>(3) Then also have a parser to read this data into csv/tabular structure for analyses that would be useful for healthcare providers and payers</li>
+<li>(4) Overall, this should promote training and understanding of the X12 837 form and how it is used in healthcare</li>
+</ul>
+<h2 id="viewing-example-data">Viewing example data:</h2>
+<ol>
+<li>Navigate to <code>837_generator_output</code> folder for the generated 837 files</li>
+<li>Navigate to <code>837_parser_output</code> folder for the parsed csv files of the generated 837 files</li>
+</ol>
+<h1 id="1-cli-for-generating-837-files">1. CLI for generating 837 files</h1>
+<h2 id="creating-your-example-data-with-the-cli">Creating your example data with the CLI:</h2>
+<ol>
+<li>Clone the repo</li>
+<li>Create a virtual environment:
+<ul>
+<li><code>python3 -m venv venv</code></li>
+<li><code>source venv/bin/activate</code></li>
+</ul>
+</li>
+<li>Install the requirements:
+<ul>
+<li><code>pip install -r requirements.txt</code></li>
+</ul>
+</li>
+<li>Run the script with the cli:
+<ul>
+<li><code>python -m generator_837.cli.main -n 13 -o generator_837_output</code>
+<ul>
+<li>this will generate 20 files with in the <code>837_generator_output</code> folder</li>
+</ul>
+</li>
+<li>The two current parameters:
+<ul>
+<li><code>n</code> or <code>--number</code> - number of 837 files to generate</li>
+<li><code>o</code> or <code>--output</code> - directory to save the 837 files</li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+<h2 id="parsing-your-example-data-with-the-cli">Parsing your example data with the CLI:</h2>
+<ol>
+<li>Run the script with the cli:
+<ul>
+<li><code>python -m parser_837.cli.main -i generator_837_output -o parser_837_output</code>
+<ul>
+<li>this will parse the 837 files in the <code>generator_837_output</code> folder and save the parsed data in the <code>parser_837_output</code> folder</li>
+</ul>
+</li>
+<li>The two current parameters:
+<ul>
+<li><code>i</code> or <code>--input</code> - directory containing the 837 files to parse</li>
+<li><code>o</code> or <code>--output</code> - directory to save the parsed CSV files</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Or if you want to parse a individual file:
+<ul>
+<li><code>python -m parser_837.cli.main -i generator_837_output/837_example_1.txt -o parser_837_output</code></li>
+</ul>
+</li>
+</ol>
+<h1 id="2-web-app-for-generation-and-parsing">2. Web App for Generation and Parsing:</h1>
+<h2 id="web-app-for-generation-and-parsing">Web App for Generation and Parsing:</h2>
+<h3 id="features">Features:</h3>
+<ul>
+<li>Generate X12 837 files with custom inputs and download them as a ZIP.</li>
+<li>Upload X12 837 files, parse them, and download the results as a ZIP of CSV files.</li>
+<li>API endpoints for generating and parsing X12 837 files.</li>
+</ul>
+<h3 id="instructions">Instructions:</h3>
+<ol>
+<li>Clone the repo</li>
+<li>Create a virtual environment:
+<ul>
+<li><code>python3 -m venv venv</code></li>
+<li><code>source venv/bin/activate</code></li>
+</ul>
+</li>
+<li>Install the requirements:
+<ul>
+<li><code>pip install -r requirements.txt</code></li>
+</ul>
+</li>
+<li>Run the Flask app:
+<ul>
+<li><code>python web/app.py</code></li>
+<li>Then navigate to <code>http://localhost:5007/</code> or <code>0.0.0.0:5007</code> in your browser</li>
+<li>You can then select the number of 837 files to generate and download them</li>
+</ul>
+</li>
+<li>If you dont want to do this, I have create a docker image that is deployed on GCP that you can use for testing found here:
+<ul>
+<li><a href="https://form837-447631255961.us-central1.run.app">837 Generator Web App: https://form837-447631255961.us-central1.run.app </a></li>
+</ul>
+</li>
+</ol>
+<h3 id="web-api-endpoints">Web API Endpoints:</h3>
+<ul>
+<li><code>/api</code> - Documentation for the API</li>
+<li><code>/api/generate</code> - GET or POST request to generate 837 files</li>
+<li><code>/api/parse</code> - POST request to parse uploaded 837 files</li>
+<li>Example usage:</li>
+</ul>
+<h1 id="get-request-for-generating-a-single-fake-837-file-text-file">GET request for generating a single fake 837 file text file:</h1>
+<pre class="hljs"><code><div>curl -X GET <span class="hljs-string">"http://localhost:5007/api/generate/"</span> --output api_output/api_single_fake_claim_2.txt
+</div></code></pre>
+<p>Expected Result: single_fake_claim.txt is downloaded containing one valid 837 claim.</p>
+<h1 id="post-request-for-generating-mulitple-fake-837-files-that-are-returned-in-a-zip-file">POST request for generating mulitple fake 837 files that are returned in a .zip file:</h1>
+<pre class="hljs"><code><div>curl -X POST <span class="hljs-string">"http://localhost:5007/api/generate/"</span> \
+     -H <span class="hljs-string">"Content-Type: application/json"</span> \
+     -d <span class="hljs-string">'{"number": 5}'</span> --output api_output/api_multiple_fake_claims_2.zip
+</div></code></pre>
+<h1 id="post-request-for-parsing-837-files">Post request for parsing 837 files:</h1>
+<pre class="hljs"><code><div>curl -X POST <span class="hljs-string">"http://localhost:5007/api/parse/"</span> \
+     -F <span class="hljs-string">"file=@api_output/api_single_fake_claim.txt"</span> --output api_output/api_parsed_837_files_2.zip
+</div></code></pre>
+<h1 id="testing-of-generated-837-files">Testing of generated 837 files:</h1>
+<ul>
+<li>For checking data structure/schema of generated 837 files from this repo with third party tools you can use:
+<ul>
+<li>https://www.stedi.com/edi/inspector</li>
+<li>https://datainsight.health/edi/viewer/</li>
+</ul>
+</li>
+</ul>
+<h1 id="required-loops-and-segments">Required Loops and Segments:</h1>
+<h2 id="heading-section">Heading Section:</h2>
+<ul>
+<li>ST: Transaction Set Header (mandatory)</li>
+<li>BHT: Beginning of Hierarchical Transaction (mandatory)</li>
+<li>NM1 Loop 1000 for Submitter and Receiver, with optional N3 (address), N4 (geographic location), and PER (contact information).</li>
+</ul>
+<h2 id="detail-section">Detail Section:</h2>
+<ul>
+<li>HL (Hierarchical Level) in Loop 2000 (mandatory) to represent different levels (e.g., billing provider, subscriber).</li>
+<li>NM1 Loop 2010 for individual providers (billing, pay-to provider, etc.), with optional N3 (address), N4 (geographic), DMG (demographic), and PER segments.</li>
+</ul>
+<h2 id="claim-level">Claim Level:</h2>
+<ul>
+<li>CLM Loop 2300 contains the main CLM segment and can contain additional data such as DTP (Date or Time Period), HI (Health Care Diagnosis Codes), and REF (reference identifiers).</li>
+</ul>
+<h2 id="service-line-level-loop-2400">Service Line Level (Loop 2400):</h2>
+<ul>
+<li>Each service line must contain LX (Line Number) and SV1 (Professional Service) or SV2 (Institutional Service).</li>
+<li>May contain DTP, QTY, and REF segments.</li>
+</ul>
+<h2 id="common-missing-segments">Common Missing Segments:</h2>
+<h3 id="loop-1000">Loop 1000:</h3>
+<ul>
+<li>Ensure that NM1-40 (Receiver) and NM1-41 (Submitter) both include necessary segments.</li>
+</ul>
+<h3 id="loop-2010-for-billing-provider">Loop 2010 for Billing Provider:</h3>
+<ul>
+<li>REF segment after NM1-85 with the Tax ID (qualifier EI).</li>
+<li>Optional N3 and N4 segments for billing provider address details.</li>
+</ul>
+<h3 id="loop-2000">Loop 2000</h3>
+<ul>
+<li>With HL for defining hierarchical levels (this might be required if not already included).</li>
+</ul>
+<h1 id="to-do">TO DO:</h1>
+<ul>
+<li>need to replace some of the faker addresses with REAL ADDRESS that are randomly selected; or perhaps with real people names as well</li>
+<li>this is will then help with the later merging of resources and services</li>
+<li>and potential identification of payers (?) or NPI locations (?) that are in X proxomity</li>
+</ul>
+<h1 id="interesting-references-and-resources">Interesting References and resources:</h1>
+<h3 id="parsing-from-databricks">Parsing from Databricks:</h3>
+<ul>
+<li>https://github.com/databricks-industry-solutions/x12-edi-parser</li>
+</ul>
+<h3 id="api-based-parsing-from-3rd-party">API based parsing from 3rd party:</h3>
+<ul>
+<li>https://datainsight.health/clinsight/swagger-ui/index.html#/File/fetchFiles</li>
+</ul>
+<h3 id="tutorials-and-basics">Tutorials and basics:</h3>
+<ul>
+<li>https://datainsight.health/edi/intro/</li>
+</ul>
+
+</body>
+
+</html>

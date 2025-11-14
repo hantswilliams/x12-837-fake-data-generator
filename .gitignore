@@ -16,8 +16,9 @@ __pycache__/
 # Claude AI files
 .claude
 
-# Manuscript folder
+# Manuscript folders
 manuscript/
+manuscripts/
 
 # Distribution / packaging
 .Python

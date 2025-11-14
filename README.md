@@ -135,7 +135,7 @@ x12-837-fake-data-generator/
 ### Web API Endpoints:
 - `/api` - Documentation for the API
 - `/api/generate` - GET or POST request to generate 837 files
-- `/api/parse` - POST request to parse uploaded 837 files
+- `/api/parse` - POST request to pars\e uploaded 837 files
 - Example usage:
 
 # GET request for generating a single fake 837 file text file:

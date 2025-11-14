@@ -51,7 +51,7 @@ The generator creates synthetic X12 837 claims through a four-stage pipeline:
 
 **Stage 2 (entity selection):** the system randomly selects realistic healthcare organizations and payers from actual CMS databases, ensuring authenticity without privacy concerns since organizations are public entities. 
 
-**Stage 3 (patient synthesis)**:** the system generates synthetic patient demographics using the Faker library [@faker2024], producing statistically realistic but entirely fictional individuals including names, addresses, dates of birth, and identifiers. 
+**Stage 3 (patient synthesis)**: the system generates synthetic patient demographics using the Faker library [@faker2024], producing statistically realistic but entirely fictional individuals including names, addresses, dates of birth, and identifiers. 
 
 **Stage 4 (transaction assembly):** the system constructs complete X12 837 transactions. This includes envelope segments (ISA, GS, ST) with control numbers, header loops for submitter, receiver, and billing provider information, subscriber loops containing patient demographics, claim information with diagnosis codes in HI segments, service lines with procedures including CPT codes, charges, and diagnosis pointers, and trailer segments (SE, GE, IEA) with validated segment counts. Generated claims include 3-8 diagnoses and 1-5 service lines per claim, with diagnosis pointers linking services to relevant diagnoses following Medicare billing requirements.
 

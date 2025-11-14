@@ -195,9 +195,61 @@ curl -X POST "http://localhost:5007/api/parse/" \
 
 
 
-# TO DO: 
-- need to replace some of the faker addresses with REAL ADDRESS that are randomly selected; or perhaps with real people names as well 
-- this is will then help with the later merging of resources and services 
+# Contributing
+
+We welcome contributions from the community! Whether you're fixing bugs, adding new features, improving documentation, or suggesting enhancements, your help is appreciated.
+
+## Ways to Contribute
+
+- **Report bugs**: Open an issue describing the bug and how to reproduce it
+- **Suggest features**: Share ideas for new features or improvements
+- **Improve documentation**: Help make the docs clearer and more comprehensive
+- **Submit code**: Fix bugs, add features, or improve existing code
+- **Add test data**: Contribute additional reference data (ICD codes, CPT codes, payers, etc.)
+
+## Getting Started
+
+1. Fork the repository
+2. Clone your fork:
+   ```bash
+   git clone https://github.com/YOUR-USERNAME/x12-837-fake-data-generator.git
+   cd x12-837-fake-data-generator
+   ```
+3. Create a virtual environment and install dependencies:
+   ```bash
+   python3 -m venv venv
+   source venv/bin/activate
+   pip install -r requirements.txt
+   ```
+4. Create a new branch for your changes:
+   ```bash
+   git checkout -b feature/your-feature-name
+   ```
+
+## Development Guidelines
+
+- **Code style**: Follow PEP 8 guidelines for Python code
+- **Testing**: Test your changes with both the CLI and web app before submitting
+- **Documentation**: Update the README.md if you add new features or change functionality
+- **Reference data**: When adding new reference data, ensure it follows the existing CSV format
+
+## Submitting Changes
+
+1. Commit your changes with clear, descriptive commit messages
+2. Push to your fork:
+   ```bash
+   git push origin feature/your-feature-name
+   ```
+3. Open a Pull Request with a clear description of your changes
+4. Reference any related issues in your PR description
+
+## Questions or Need Help?
+
+Feel free to open an issue with your question or reach out through the repository's issue tracker.
+
+# TO DO:
+- need to replace some of the faker addresses with REAL ADDRESS that are randomly selected; or perhaps with real people names as well
+- this is will then help with the later merging of resources and services
 - and potential identification of payers (?) or NPI locations (?) that are in X proxomity 
 
 # Interesting References and resources:

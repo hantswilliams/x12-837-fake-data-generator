@@ -4,35 +4,18 @@
 
 ### Repository Requirements
 
-- [ ] **Add LICENSE file** to repository root
-  - JOSS requires an OSI-approved open-source license
-  - Recommended: MIT License or Apache 2.0
-  - Add file: `LICENSE` or `LICENSE.txt`
-  - Example MIT License:
-    ```
-    MIT License
-
-    Copyright (c) 2024 [Your Name]
-
-    Permission is hereby granted, free of charge, to any person obtaining a copy...
-    ```
-
+- [x] **Add LICENSE file** to repository root
 - [ ] **Update README.md** with proper documentation
   - [x] Installation instructions
   - [x] Usage examples
   - [x] API documentation
-  - [ ] Link to live demo
   - [ ] Citation information
-
 - [ ] **Add CONTRIBUTING.md** (optional but recommended)
   - Guidelines for contributing to the project
   - Code of conduct
   - How to report issues
+- [x] **Create GitHub release/tag**
 
-- [ ] **Create GitHub release/tag**
-  - Tag version (e.g., v1.0.0)
-  - Create release on GitHub
-  - Include archived DOI from Zenodo (see below)
 
 ### Code Quality
 
@@ -41,31 +24,23 @@
   - [ ] Docstrings for all public functions
   - [x] Clear module structure
 
-- [ ] **Tests exist** (JOSS requires some tests)
-  - [ ] Add unit tests (even basic ones)
-  - [ ] Add to repository in `tests/` directory
+- [x] **Tests exist** (JOSS requires some tests)
+  - [x] Add unit tests (even basic ones)
+  - [x] Add to repository in `tests/` directory
   - Suggested: Test segment generation, parsing accuracy
 
-- [ ] **Dependencies documented**
+- [x] **Dependencies documented**
   - [x] requirements.txt exists
-  - [ ] Python version specified (add to README)
+  - [x] Python version specified (add to README)
   - Recommended: Add `setup.py` or `pyproject.toml`
 
 ### Zenodo Archive
 
-- [ ] **Create Zenodo DOI** for software
-  - Visit: https://zenodo.org/
-  - Connect GitHub repository to Zenodo
-  - Create release on GitHub → automatically archived on Zenodo
-  - Get DOI (format: 10.5281/zenodo.XXXXXXX)
-  - Add DOI badge to README
+- [x] **Create Zenodo DOI** for software
 
 ### ORCID ID
 
 - [ ] **Update paper.md with your ORCID ID**
-  - Get ORCID at: https://orcid.org/
-  - Replace `0000-0000-0000-0000` in `paper.md` with your actual ORCID
-  - Update affiliation information
 
 ### Paper Completeness
 

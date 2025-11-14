@@ -298,7 +298,7 @@ The target audience includes health informatics educators, healthcare IT student
 
 ## Author Contributions
 
-[To be filled in based on actual contributors]
+HW is the  author and primary contributor of this work. HW conceptualized the current solution of the X12-837-Fake-Data-Generator toolkit, including both the generator and parser modules.
 
 ---
 
@@ -330,13 +330,12 @@ The target audience includes health informatics educators, healthcare IT student
 
 ## Data Availability
 
-- Source code: https://github.com/[username]/x12-837-fake-data-generator
+- Source code: https://github.com/hantswilliams/x12-837-fake-data-generator
 - Reference datasets: Documented in generator_837/api/readme.md
 - Sample outputs: Included in repository (generator_837_output/)
-- Live demo: https://form837-447631255961.us-central1.run.app
 
 ---
 
 ## License
 
-[Specify license - recommend MIT or Apache 2.0 for open-source scientific software]
+CC BY-NC 4.0: Please see (lisence file)[https://github.com/hantswilliams/x12-837-fake-data-generator/blob/main/LICENSE]

@@ -13,6 +13,34 @@ from .data_loader import load_codes, load_orgs, load_payers
 from .utils import get_random_code
 
 def generate_837_transaction():
+    """
+    Generate a complete synthetic X12 837 institutional healthcare claim transaction.
+
+    This function creates a realistic 837 claim with:
+    - Random healthcare provider from CMS NPI registry
+    - Random insurance payer from Healthcare.gov database
+    - Synthetic patient demographics using Faker library
+    - 3-8 random diagnosis codes (ICD-10)
+    - 1-5 service lines with procedure codes (CPT-4)
+    - Proper X12 segment structure per 005010X223A2 standard
+
+    Returns:
+        str: Complete X12 837 transaction as a newline-separated string of segments.
+             Each segment ends with ~ delimiter. Transaction includes ISA/GS envelope,
+             header loops (submitter/receiver), billing provider, subscriber, claim
+             information, diagnosis codes, and service line details.
+
+    Example:
+        >>> transaction = generate_837_transaction()
+        >>> print(transaction[:50])
+        ISA*00*          *00*          *ZZ*...
+
+    Note:
+        - Total charge amount is randomly generated (100-1000)
+        - Service line charges are randomly distributed to sum to total charge
+        - Diagnosis pointers in service lines reference diagnosis sequence numbers
+        - All data is synthetic and HIPAA-compliant (no real PHI)
+    """
 
     # Load ICD and CPT codes, orgs, and payers
     icd_codes, cpt_codes = load_codes()

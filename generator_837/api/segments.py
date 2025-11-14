@@ -10,6 +10,25 @@ import datetime
 ## ISA Interchange Control Header
 ## The Interchange Control Header starts and identifies an electronic interchange of functional groups.
 def generate_isa_segment(sender_id, receiver_id, control_number):
+    """
+    Generate X12 ISA (Interchange Control Header) segment.
+
+    The ISA segment identifies the sender and receiver of the electronic interchange
+    and provides envelope control information.
+
+    Args:
+        sender_id (str): Sender's interchange ID (will be padded to 15 characters)
+        receiver_id (str): Receiver's interchange ID (will be padded to 15 characters)
+        control_number (str): Interchange control number (9 digits, must match IEA02)
+
+    Returns:
+        str: Complete ISA segment ending with ~ delimiter
+
+    Example:
+        >>> segment = generate_isa_segment("123456789012345", "BCBSLA001", "000000001")
+        >>> segment.startswith("ISA*00*")
+        True
+    """
     ## ## https://providers.bcbsla.com/-/media/Files/Providers/5010_Institutional_Claims_Companion_Guide%20pdf.pdf
     ## ISA has 16 fields
         ## ISA01 - Authorization Information Qualifier (2 characters): value: 00
@@ -54,6 +73,26 @@ def generate_isa_segment(sender_id, receiver_id, control_number):
 ## indicates the beginning of a functional group and provides
 ## control information. The GS segment has 8 fields.
 def generate_gs_segment(sender_id, receiver_id, control_number):
+    """
+    Generate X12 GS (Functional Group Header) segment.
+
+    The GS segment indicates the beginning of a functional group and must match
+    the sender/receiver from the ISA segment.
+
+    Args:
+        sender_id (str): Application sender's code (should match ISA06)
+        receiver_id (str): Application receiver's code (should match ISA08)
+        control_number (str): Group control number
+
+    Returns:
+        str: Complete GS segment ending with ~ delimiter, formatted for 837I
+             (Healthcare Claim Institutional) version 005010X223A2
+
+    Example:
+        >>> segment = generate_gs_segment("123456789012345", "BCBSLA001", "1")
+        >>> "GS*HC*" in segment
+        True
+    """
     ## https://providers.bcbsla.com/-/media/Files/Providers/5010_Institutional_Claims_Companion_Guide%20pdf.pdf
     ## Functional Group GS (header) has 8 fields
         ## GS01 - Functional Identifier Code (2 characters): value: HC
@@ -81,6 +120,25 @@ def generate_gs_segment(sender_id, receiver_id, control_number):
 
 ## ST Segment
 def generate_st_segment(transaction_control_number):
+    """
+    Generate X12 ST (Transaction Set Header) segment.
+
+    The ST segment indicates the start of a transaction set and assigns a control
+    number that must match the SE segment at the end.
+
+    Args:
+        transaction_control_number (str): Transaction control number (4-9 digits,
+                                         must match SE02)
+
+    Returns:
+        str: Complete ST segment ending with ~ delimiter, formatted for 837
+             transaction set with implementation guide 005010X223A2
+
+    Example:
+        >>> segment = generate_st_segment("0001")
+        >>> segment
+        'ST*837*0001*005010X223A2~'
+    """
     ## To indicate the start of a transaction set and to assign a control number
     ## https://providers.bcbsla.com/-/media/Files/Providers/5010_Institutional_Claims_Companion_Guide%20pdf.pdf
     ## Transaction Set Header ST (header) has 3 fields

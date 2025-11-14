@@ -1,6 +1,7 @@
 # Testing synthetic data
 future/patientsSynthetic/docker-compose-complex-example/output
 future/patientsSynthetic/docker-simple-example/output
+api_output
 generator_837_output
 parser_837_output
 

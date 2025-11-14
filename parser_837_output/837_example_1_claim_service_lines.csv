@@ -1,4 +1,0 @@
-CLM ID,Service Line Number,Product or Service ID (SV101),Monetary Amount (SV102),Unit or Basis for Measurement Code (SV103),Quantity (SV104),Diagnosis Code Pointer,Date Time Qualifier (DTP01),Service Date (DTP03),Reference Identification Qualifier (REF01),Reference Identification (REF02)
-4742333269,1,HC:97605,76,UN,1,[1],472,20180428,6R,142671
-4742333269,2,HC:67228,33,UN,1,"[2, 4, 6]",472,20180428,6R,142671
-4742333269,3,HC:92316,107,UN,1,[6],472,20180428,6R,142671

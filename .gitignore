@@ -40,6 +40,18 @@ share/python-wheels/
 *.egg
 MANIFEST
 
+# BeeWare/Briefcase build artifacts
+beeware/macOS/
+beeware/windows/
+beeware/linux/
+beeware/iOS/
+beeware/android/
+beeware/*.app
+beeware/*.msi
+beeware/*.dmg
+beeware/generator_837/
+beeware/x12_837_tool/resources/
+
 # PyInstaller
 #  Usually these files are written by a python script from a template
 #  before PyInstaller builds the exe, so as to inject date/other infos into it.
@@ -143,6 +155,7 @@ venv/
 ENV/
 env.bak/
 venv.bak/
+runtime-mac-osx/venv-mac
 
 # Spyder project settings
 .spyderproject

@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>X12 837 Generator & Parser</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/pyodide/v0.24.1/full/pyodide.js"></script>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🏥 X12 837 Generator & Parser</h1>
+            <p class="subtitle">Generate and parse healthcare claim files - runs entirely in your browser!</p>
+        </header>
+
+        <div class="loading" id="loading">
+            <div class="spinner"></div>
+            <p>Loading Python environment...</p>
+        </div>
+
+        <div class="tabs" id="app" style="display: none;">
+            <div class="tab-buttons">
+                <button class="tab-button active" onclick="switchTab('generator')">📝 Generator</button>
+                <button class="tab-button" onclick="switchTab('parser')">🔍 Parser</button>
+            </div>
+
+            <!-- Generator Tab -->
+            <div id="generator-tab" class="tab-content active">
+                <div class="card">
+                    <h2>Generate X12 837 Files</h2>
+                    <p>Create synthetic healthcare claim files for testing</p>
+
+                    <div class="form-group">
+                        <label for="num-files">Number of files (1-25):</label>
+                        <input type="number" id="num-files" min="1" max="25" value="5">
+                    </div>
+
+                    <button class="btn btn-primary" onclick="generateFiles()">
+                        🚀 Generate Files
+                    </button>
+
+                    <div id="generator-status" class="status"></div>
+                    <div id="generator-output" class="output"></div>
+                </div>
+            </div>
+
+            <!-- Parser Tab -->
+            <div id="parser-tab" class="tab-content">
+                <div class="card">
+                    <h2>Parse X12 837 Files</h2>
+                    <p>Extract claim data from X12 files to CSV format</p>
+
+                    <div class="form-group">
+                        <label for="file-upload">Select X12 837 file:</label>
+                        <input type="file" id="file-upload" accept=".txt,.x12,.837">
+                    </div>
+
+                    <button class="btn btn-primary" onclick="parseFile()">
+                        🔍 Parse File
+                    </button>
+
+                    <div id="parser-status" class="status"></div>
+                    <div id="parser-output" class="output"></div>
+                </div>
+            </div>
+        </div>
+
+        <footer>
+            <p>Powered by <a href="https://pyodide.org" target="_blank">Pyodide</a> - Python running in WebAssembly</p>
+        </footer>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>

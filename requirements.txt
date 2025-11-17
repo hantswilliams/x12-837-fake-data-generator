@@ -4,3 +4,4 @@ pandas
 flask
 flask-restx
 pytest
+py2app

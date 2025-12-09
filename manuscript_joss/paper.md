@@ -219,4 +219,8 @@ Planned developments will expand the package's capabilities across multiple dime
 
 This work utilizes publicly available healthcare databases from the Centers for Medicare & Medicaid Services (CMS), including the National Provider Identifier (NPI) registry and Healthcare.gov insurance plan data. The author thanks the open-source community for foundational libraries (Faker, Flask, Pandas) that made this package possible.
 
+# Code Generation/LLM Use
+
+Claude Code (v2, Opus 4.5 – Claude Max) assisted in software development and manuscript preparation. For development, it was used to iterate on and refine the functional logic in `generator_837/api/segments.py` and `generator_837/api/generator.py`, and to draft and revise unit tests in `generator_837/tests/test_generator.py`. For the manuscript, Claude Code was primarily used to: (a) check for grammatical and syntactic errors, (b) reformat and perform edits to the markdown code blocks and some inline code examples, and (c) suggest minor wording changes for clarity and internal consistency of concepts. All output from Claude Code’s assistant was manually reviewed, and revised where needed. 
+
 # References

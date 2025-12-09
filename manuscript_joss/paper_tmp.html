@@ -1,0 +1,566 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>paper.md</title>
+    <meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+    
+<style>
+/* https://github.com/microsoft/vscode/blob/master/extensions/markdown-language-features/media/markdown.css */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+body {
+	font-family: var(--vscode-markdown-font-family, -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif);
+	font-size: var(--vscode-markdown-font-size, 14px);
+	padding: 0 26px;
+	line-height: var(--vscode-markdown-line-height, 22px);
+	word-wrap: break-word;
+}
+
+html,footer,header{
+	font-family: var(--vscode-markdown-font-family, -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif);
+	font-size: var(--vscode-markdown-font-size, 14px);
+}
+
+#code-csp-warning {
+	position: fixed;
+	top: 0;
+	right: 0;
+	color: white;
+	margin: 16px;
+	text-align: center;
+	font-size: 12px;
+	font-family: sans-serif;
+	background-color:#444444;
+	cursor: pointer;
+	padding: 6px;
+	box-shadow: 1px 1px 1px rgba(0,0,0,.25);
+}
+
+#code-csp-warning:hover {
+	text-decoration: none;
+	background-color:#007acc;
+	box-shadow: 2px 2px 2px rgba(0,0,0,.25);
+}
+
+body.scrollBeyondLastLine {
+	margin-bottom: calc(100vh - 22px);
+}
+
+body.showEditorSelection .code-line {
+	position: relative;
+}
+
+body.showEditorSelection .code-active-line:before,
+body.showEditorSelection .code-line:hover:before {
+	content: "";
+	display: block;
+	position: absolute;
+	top: 0;
+	left: -12px;
+	height: 100%;
+}
+
+body.showEditorSelection li.code-active-line:before,
+body.showEditorSelection li.code-line:hover:before {
+	left: -30px;
+}
+
+.vscode-light.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.15);
+}
+
+.vscode-light.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.40);
+}
+
+.vscode-light.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-dark.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.4);
+}
+
+.vscode-dark.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.60);
+}
+
+.vscode-dark.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-high-contrast.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 160, 0, 0.7);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 160, 0, 1);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+img {
+	max-width: 100%;
+	max-height: 100%;
+}
+
+a {
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+a:focus,
+input:focus,
+select:focus,
+textarea:focus {
+	outline: 1px solid -webkit-focus-ring-color;
+	outline-offset: -1px;
+}
+
+hr {
+	border: 0;
+	height: 2px;
+	border-bottom: 2px solid;
+}
+
+h1 {
+	padding-bottom: 0.3em;
+	line-height: 1.2;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+}
+
+h1, h2, h3 {
+	font-weight: normal;
+}
+
+table {
+	border-collapse: collapse;
+}
+
+table > thead > tr > th {
+	text-align: left;
+	border-bottom: 1px solid;
+}
+
+table > thead > tr > th,
+table > thead > tr > td,
+table > tbody > tr > th,
+table > tbody > tr > td {
+	padding: 5px 10px;
+}
+
+table > tbody > tr + tr > td {
+	border-top: 1px solid;
+}
+
+blockquote {
+	margin: 0 7px 0 5px;
+	padding: 0 16px 0 10px;
+	border-left-width: 5px;
+	border-left-style: solid;
+}
+
+code {
+	font-family: Menlo, Monaco, Consolas, "Droid Sans Mono", "Courier New", monospace, "Droid Sans Fallback";
+	font-size: 1em;
+	line-height: 1.357em;
+}
+
+body.wordWrap pre {
+	white-space: pre-wrap;
+}
+
+pre:not(.hljs),
+pre.hljs code > div {
+	padding: 16px;
+	border-radius: 3px;
+	overflow: auto;
+}
+
+pre code {
+	color: var(--vscode-editor-foreground);
+	tab-size: 4;
+}
+
+/** Theming */
+
+.vscode-light pre {
+	background-color: rgba(220, 220, 220, 0.4);
+}
+
+.vscode-dark pre {
+	background-color: rgba(10, 10, 10, 0.4);
+}
+
+.vscode-high-contrast pre {
+	background-color: rgb(0, 0, 0);
+}
+
+.vscode-high-contrast h1 {
+	border-color: rgb(0, 0, 0);
+}
+
+.vscode-light table > thead > tr > th {
+	border-color: rgba(0, 0, 0, 0.69);
+}
+
+.vscode-dark table > thead > tr > th {
+	border-color: rgba(255, 255, 255, 0.69);
+}
+
+.vscode-light h1,
+.vscode-light hr,
+.vscode-light table > tbody > tr + tr > td {
+	border-color: rgba(0, 0, 0, 0.18);
+}
+
+.vscode-dark h1,
+.vscode-dark hr,
+.vscode-dark table > tbody > tr + tr > td {
+	border-color: rgba(255, 255, 255, 0.18);
+}
+
+</style>
+
+<style>
+/* Tomorrow Theme */
+/* http://jmblog.github.com/color-themes-for-google-code-highlightjs */
+/* Original theme - https://github.com/chriskempson/tomorrow-theme */
+
+/* Tomorrow Comment */
+.hljs-comment,
+.hljs-quote {
+	color: #8e908c;
+}
+
+/* Tomorrow Red */
+.hljs-variable,
+.hljs-template-variable,
+.hljs-tag,
+.hljs-name,
+.hljs-selector-id,
+.hljs-selector-class,
+.hljs-regexp,
+.hljs-deletion {
+	color: #c82829;
+}
+
+/* Tomorrow Orange */
+.hljs-number,
+.hljs-built_in,
+.hljs-builtin-name,
+.hljs-literal,
+.hljs-type,
+.hljs-params,
+.hljs-meta,
+.hljs-link {
+	color: #f5871f;
+}
+
+/* Tomorrow Yellow */
+.hljs-attribute {
+	color: #eab700;
+}
+
+/* Tomorrow Green */
+.hljs-string,
+.hljs-symbol,
+.hljs-bullet,
+.hljs-addition {
+	color: #718c00;
+}
+
+/* Tomorrow Blue */
+.hljs-title,
+.hljs-section {
+	color: #4271ae;
+}
+
+/* Tomorrow Purple */
+.hljs-keyword,
+.hljs-selector-tag {
+	color: #8959a8;
+}
+
+.hljs {
+	display: block;
+	overflow-x: auto;
+	color: #4d4d4c;
+	padding: 0.5em;
+}
+
+.hljs-emphasis {
+	font-style: italic;
+}
+
+.hljs-strong {
+	font-weight: bold;
+}
+</style>
+
+<style>
+/*
+ * Custom MD PDF CSS
+ */
+html,footer,header{
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif, "Meiryo";
+
+ }
+body {
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif, "Meiryo";
+	padding: 0 12px;
+}
+
+pre {
+	background-color: #f8f8f8;
+	border: 1px solid #cccccc;
+	border-radius: 3px;
+	overflow-x: auto;
+	white-space: pre-wrap;
+	overflow-wrap: break-word;
+}
+
+pre:not(.hljs) {
+	padding: 23px;
+	line-height: 19px;
+}
+
+blockquote {
+	background: rgba(127, 127, 127, 0.1);
+	border-color: rgba(0, 122, 204, 0.5);
+}
+
+.emoji {
+	height: 1.4em;
+}
+
+code {
+	font-size: 14px;
+	line-height: 19px;
+}
+
+/* for inline code */
+:not(pre):not(.hljs) > code {
+	color: #C9AE75; /* Change the old color so it seems less like an error */
+	font-size: inherit;
+}
+
+/* Page Break : use <div class="page"/> to insert page break
+-------------------------------------------------------- */
+.page {
+	page-break-after: always;
+}
+
+</style>
+<link rel="stylesheet" href="file:///Users/hantswilliams/Development/python/x12-837-fake-data-generator/R%3A%5C2.Travail%5C1.Enseignement%5CCours%5C_1.Outils%5C2.Developpement%5C1.SCSS%5Cmain.css" type="text/css"><link rel="stylesheet" href="file:///Users/hantswilliams/Development/python/x12-837-fake-data-generator/D%3A%5Crdaros%5CCours%5C_1.Outils%5C2.Developpement%5C1.SCSS%5Cmain.css" type="text/css">
+</head>
+
+<body>
+    <h1 id="summary">Summary</h1>
+<p>Healthcare claims data in X12 837 format represents the standard for electronic healthcare claim submission in the United States, and is mandated by the federal government for processing billions of dollars in healthcare transactions annually. However, access to real claims data is severely restricted due to patient privacy regulations, creating significant barriers for healthcare informatics education, software development, and research. The <code>X12-837-Fake-Data-Generator</code> is an open-source Python package that generates realistic but synthetic X12 837 claim files, in addition to parsing them into structured CSV datasets for analysis.</p>
+<p>This package combines authentic healthcare reference data from CMS databases (provider NPIs, insurance payers, ICD-10 diagnoses, CPT procedures) with synthetic patient demographics to create privacy-compliant test data that maintains the complexity and structure of real healthcare claims.Lastly, providing the capabilities of both 837 generation and parsing through multiple interfaces (command-line, web application, and REST API), this package democratizes access to healthcare claims data for education, testing, and research purposes while eliminating privacy concerns.</p>
+<h1 id="statement-of-need">Statement of Need</h1>
+<p>The X12 formatted 837 file is the standard for healthcare claim submission, used by providers, payers, and clearinghouses to process healthcare services. Understanding its structure is essential for healthcare informaticists learning data standards and interoperability, software developers building claims processing and revenue cycle management systems, data analysts performing utilization analysis and cost management, healthcare administrators testing system integrations and workflows, and researchers studying claims-based outcomes and population health.</p>
+<p>Despite the ubiquity of claims data, accessing the raw versions of X12-formatted 837 files for learning or testing is difficult due to HIPAA restrictions on Protected Health Information (PHI) and Personally Identifiable Information (PII) contained within these files. There are existing solutions and solutions that can be explore but they all have significant limitations. First are the commercial X12 test generators which can cost thousands of dollars annually, and provide limited customization [@x12org2023]. A second approach could be going with manual claim creation, which is time-intensive, error-prone, and not scalable. While a third approach could be de-identifying real data, which requires access to data in the first place, and carries re-identification risks and requires IRB approvals and data use agreements. Lastly, the few clinical data generators that we were able to find like Synthea [@walonoski2018] focus on EHR data rather than billing and claims formats, while the CMS synthetic data (SynPUF) [@cms2013synpuf] is Medicare-only, limited to specific years, and does not provide the data in the raw X12 format.</p>
+<p>We are not aware of any existing open-source tool that provides both generation and parsing of realistic X12 837 claims, with validation against current X12 standards. <code>X12-837-Fake-Data-Generator</code> fills this critical gap by enabling privacy-compliant (fake) claims data generation.</p>
+<p>The package provides realistic medical content using real ICD-10 diagnoses, CPT procedures, provider NPIs, and insurance payers from authoritative CMS databases. It generates synthetic patient data using validated algorithms through the Faker library, ensuring zero re-identification risk. The system produces standards-compliant X12 transactions verifiable with industry validators such as Stedi EDI Inspector and DataInsight Health. The package also combines both generation and parsing functionality in a single unified system, supporting diverse user needs through multiple interfaces including CLI for automation, web UI for accessibility, and REST API for integration. Comprehensive documentation and examples make the package particularly valuable for teaching healthcare data standards.</p>
+<p>This package is particularly valuable for academic institutions teaching health informatics, healthcare organizations testing claims systems, and researchers needing reproducible synthetic data for methods development.</p>
+<h1 id="architecture-and-implementation">Architecture and Implementation</h1>
+<h2 id="system-design">System Design</h2>
+<p><code>X12-837-Fake-Data-Generator</code> consists of two primary modules, with three shared interface implementations:</p>
+<h3 id="1-generator-module-generator837">1. Generator Module (<code>generator_837/</code>)</h3>
+<p>The generator creates synthetic X12 837 claims through a four-stage pipeline:</p>
+<p><strong>Stage 1 (reference data loading):</strong> the system loads medical coding systems and provider/payer databases including ICD-10-CM diagnosis codes (approximately 72,000 codes, 14 MB), CPT procedure codes (a subset of approximately 10,000 codes, 249 KB), the healthcare payer database from Healthcare.gov (approximately 4,000 insurers, 4 MB), the NPPES National Provider Identifier registry (approximately 6 million providers, 29 MB), and hospital and facility data from CMS (approximately 6,000 facilities, 1.4 MB).</p>
+<p><strong>Stage 2 (entity selection):</strong> the system randomly selects realistic healthcare organizations and payers from actual CMS databases, ensuring authenticity without privacy concerns since organizations are public entities.</p>
+<p><strong>Stage 3 (patient synthesis)</strong>: the system generates synthetic patient demographics using the Faker library [@faker2024], producing statistically realistic but entirely fictional individuals including names, addresses, dates of birth, and identifiers.</p>
+<p><strong>Stage 4 (transaction assembly):</strong> the system constructs complete X12 837 transactions. This includes envelope segments (ISA, GS, ST) with control numbers, header loops for submitter, receiver, and billing provider information, subscriber loops containing patient demographics, claim information with diagnosis codes in HI segments, service lines with procedures including CPT codes, charges, and diagnosis pointers, and trailer segments (SE, GE, IEA) with validated segment counts. Generated claims include 3-8 diagnoses and 1-5 service lines per claim, with diagnosis pointers linking services to relevant diagnoses following Medicare billing requirements.</p>
+<h3 id="2-parser-module-parser837">2. Parser Module (<code>parser_837/</code>)</h3>
+<p>The parser extracts structured data from X12 837 files into three normalized CSV tables: a header file, a diagnoses file, and a service line file. The header table contains transaction metadata, provider information, and subscriber demographics. The diagnoses table includes ICD-10 codes with qualifiers and sequence numbers. The service lines table captures CPT codes, charges, units, service dates, and diagnosis pointers. The parser preserves critical relationships, particularly diagnosis-to-service linkages, which are essential for claims analytics and enable downstream analysis of utilization patterns, costs, and quality metrics.</p>
+<h2 id="technical-implementation">Technical Implementation</h2>
+<p>The package has only been tested in Python 3.11 or higher. Core dependencies include Faker [@faker2024] for synthetic demographic data generation, Pandas [@mckinney2010] for reference data loading and CSV operations, Flask [@flask2023] as the web application framework, Flask-RESTx [@flaskrestx2023] for REST API development with automatic OpenAPI/Swagger documentation, and the regex library for advanced pattern matching in X12 segment parsing.</p>
+<p><strong>Code Organization</strong>:</p>
+<pre class="hljs"><code><div>x12<span class="hljs-number">-837</span>-fake-data-generator/
+├── generator_837/
+│   ├── api/              <span class="hljs-comment"># Core generation logic</span>
+│   ├── cli/              <span class="hljs-comment"># Command-line interface</span>
+│   └── web/              <span class="hljs-comment"># Flask web application</span>
+├── parser_837/
+│   ├── api/              <span class="hljs-comment"># Core parsing logic</span>
+│   ├── cli/              <span class="hljs-comment"># Command-line interface</span>
+│   └── web/              <span class="hljs-comment"># Flask web application</span>
+└── web/                  <span class="hljs-comment"># Combined web application</span>
+    ├── app.py            <span class="hljs-comment"># Unified Flask app</span>
+    └── api.py            <span class="hljs-comment"># REST API endpoints</span>
+</div></code></pre>
+<h2 id="validation">Validation</h2>
+<p>Generated X12 837 transactions are validated against industry-standard EDI validators including Stedi EDI Inspector (https://www.stedi.com/edi/inspector) and DataInsight Health EDI Viewer (https://datainsight.health/edi/viewer/). These third-party tools verify syntax compliance with X12 specifications, including proper segment structure, element positioning, data types, and control number accuracy.</p>
+<h1 id="installation-and-usage">Installation and Usage</h1>
+<h2 id="installation">Installation</h2>
+<p>The package is available on GitHub and can be installed using pip:</p>
+<pre class="hljs"><code><div>git <span class="hljs-built_in">clone</span> https://github.com/hantswilliams/x12-837-fake-data-generator.git
+<span class="hljs-built_in">cd</span> x12-837-fake-data-generator
+python3 -m venv venv
+<span class="hljs-built_in">source</span> venv/bin/activate  <span class="hljs-comment"># On Windows: venv\Scripts\activate</span>
+pip install -r requirements.txt
+</div></code></pre>
+<h2 id="command-line-interface">Command-Line Interface</h2>
+<h3 id="generate-837-claims">Generate 837 Claims</h3>
+<pre class="hljs"><code><div><span class="hljs-comment"># Generate 10 synthetic 837 claim files</span>
+python -m generator_837.cli.main -n 10 -o output_directory/
+</div></code></pre>
+<p>Parameters:</p>
+<ul>
+<li><code>-n, --number</code>: Number of claim files to generate (default: 1)</li>
+<li><code>-o, --output</code>: Output directory path (default: <code>generator_837_output/</code>)</li>
+</ul>
+<h3 id="parse-837-claims">Parse 837 Claims</h3>
+<pre class="hljs"><code><div><span class="hljs-comment"># Parse directory of 837 files</span>
+python -m parser_837.cli.main -i input_directory/ -o parsed_output/
+
+<span class="hljs-comment"># Parse single file</span>
+python -m parser_837.cli.main -i claim_file.txt -o parsed_output/
+</div></code></pre>
+<p>Parameters:</p>
+<ul>
+<li><code>-i, --input</code>: Input file or directory containing 837 files</li>
+<li><code>-o, --output</code>: Output directory for parsed CSV files</li>
+</ul>
+<h2 id="web-application">Web Application</h2>
+<p>A unified web interface provides both generation and parsing capabilities:</p>
+<pre class="hljs"><code><div>python web/app.py
+<span class="hljs-comment"># Navigate to http://localhost:5007</span>
+</div></code></pre>
+<p>The web application features form-based generation with customizable claim count (1-25 files), file upload for parsing with ZIP download of parsed CSVs, and interactive Swagger API documentation at the <code>/api</code> endpoint.</p>
+<h2 id="rest-api">REST API</h2>
+<p>The Flask-RESTx API provides programmatic access:</p>
+<h3 id="generate-claims">Generate Claims</h3>
+<pre class="hljs"><code><div><span class="hljs-comment"># Generate single claim (returns text file)</span>
+curl -X GET <span class="hljs-string">"http://localhost:5007/api/generate/"</span> \
+     --output single_claim.txt
+
+<span class="hljs-comment"># Generate multiple claims (returns ZIP archive)</span>
+curl -X POST <span class="hljs-string">"http://localhost:5007/api/generate/"</span> \
+     -H <span class="hljs-string">"Content-Type: application/json"</span> \
+     -d <span class="hljs-string">'{"number": 5}'</span> \
+     --output claims.zip
+</div></code></pre>
+<h3 id="parse-claims">Parse Claims</h3>
+<pre class="hljs"><code><div><span class="hljs-comment"># Upload and parse 837 file (returns ZIP of 3 CSVs)</span>
+curl -X POST <span class="hljs-string">"http://localhost:5007/api/parse/"</span> \
+     -F <span class="hljs-string">"file=@claim_file.txt"</span> \
+     --output parsed_data.zip
+</div></code></pre>
+<h2 id="example-x12-generated-output">Example X12 Generated Output</h2>
+<p>Generated 837 files follow X12 format:</p>
+<pre class="hljs"><code><div>ISA*00*          *00*          *ZZ*SUBMITTER123  *ZZ*RECEIVER456   *241106*1430*^*00501*000000001*0*P*:~
+GS*HC*SUBMITTER123*RECEIVER456*20241106*1430*1*X*005010X223A2~
+ST*837*0001*005010X223A2~
+BHT*0019*00*1234*20241106*1430*CH~
+NM1*41*2*HEALTHCARE CLINIC*****46*1234567890~
+NM1*40*2*BLUE SHIELD OF CA*****46*9876543210~
+HL*1**20*1~
+NM1*85*2*GENERAL HOSPITAL*****XX*1234567890~
+HL*2*1*22*0~
+NM1*IL*1*SMITH*JOHN****MI*123456789~
+CLM*CLAIM001*1000.00***11:A:1*Y*A*Y*Y~
+HI*ABK:E119*ABF:I10*ABF:E785~
+LX*1~
+SV1*HC:99213*250.00*UN*1***1~
+DTP*472*D8*20241105~
+SE*15*0001~
+GE*1*1~
+IEA*1*000000001~
+</div></code></pre>
+<h1 id="use-cases">Use Cases</h1>
+<p>This package enables diverse applications across healthcare informatics, in particular within the domains of education, software development, research, and quality improvement.</p>
+<ol>
+<li>
+<p>Education and training: supports teaching X12 EDI standards in health informatics curricula, facilitating hands-on laboratories for claims processing workflows, enabling understanding of revenue cycle management without privacy concerns, and providing practical training for medical billing and coding specialists who need experience with real-world claim structures.</p>
+</li>
+<li>
+<p>Software development and testing contexts: enables unit and integration testing for claims processing systems, supports ETL pipeline development for claims data warehouses, validates adjudication logic and payment calculations, and facilitates load testing of clearinghouse and payer submission systems without requiring access to protected health information.</p>
+</li>
+<li>
+<p>Research and analytics applications: enables development of claims analysis algorithms without data access barriers, supports testing of risk adjustment and predictive models, facilitates prototyping of population health dashboards and visualizations, and provides reproducible synthetic data for methods papers and algorithm validation studies.</p>
+</li>
+<li>
+<p>Quality improvement initiatives: benefit from simulation of quality measure calculations such as HEDIS and CMS Stars metrics, testing of prior authorization systems, validation of denial management workflows, and auditing of billing compliance rules in a risk-free environment.</p>
+</li>
+</ol>
+<h1 id="comparison-to-similar-tools">Comparison to Similar Tools</h1>
+<table>
+<thead>
+<tr>
+<th>Tool</th>
+<th>X12 Claims</th>
+<th>Synthetic</th>
+<th>Open Source</th>
+<th>Parser</th>
+<th>Cost</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>This package</strong></td>
+<td>Yes</td>
+<td>Yes</td>
+<td>Yes</td>
+<td>Yes</td>
+<td>Free</td>
+</tr>
+<tr>
+<td>Synthea</td>
+<td>No (EHR)</td>
+<td>Yes</td>
+<td>Yes</td>
+<td>N/A</td>
+<td>Free</td>
+</tr>
+<tr>
+<td>CMS SynPUF</td>
+<td>Yes</td>
+<td>Yes</td>
+<td>No</td>
+<td>No</td>
+<td>Free</td>
+</tr>
+<tr>
+<td>Commercial EDI tools</td>
+<td>Yes</td>
+<td>Limited</td>
+<td>No</td>
+<td>Limited</td>
+<td>$5K-$50K</td>
+</tr>
+<tr>
+<td>Stedi/DataInsight</td>
+<td>Validate only</td>
+<td>No</td>
+<td>No</td>
+<td>Yes</td>
+<td>Free/Paid</td>
+</tr>
+</tbody>
+</table>
+<p>Synthea [@walonoski2018] excels at generating longitudinal patient clinical data but does not produce X12 billing transactions, focusing instead on electronic health record formats. CMS SynPUF [@cms2013synpuf] provides Medicare synthetic claims but delivers data in research file format rather than native X12 format, is limited to the elderly Medicare population, and uses data that could be up to a decade old. Commercial EDI generators produce valid X12 transactions but are expensive proprietary black boxes with annual costs ranging from $5,000 to $50,000, making them unsuitable for education or research reproducibility where open access to methods is essential. While this package uniquely combines X12 format compliance, synthetic data generation, comprehensive parsing capabilities, and open-source accessibility in a single unified system.</p>
+<h1 id="future-enhancements">Future Enhancements</h1>
+<p>Planned developments will expand the package's capabilities across multiple dimensions. (1) Integration with Synthea to enable generation of claims linked to patient clinical trajectories. This would allow correlation between clinical events and billing data. (2) Support for additional claim types including 837P (professional claims) and 837D (dental claims) will broaden the package's applicability beyond institutional claims. (3) Development of longitudinal data capabilities will enable generation of multi-claim patient histories suitable for outcomes research and care coordination studies. (4) Enhanced geographic realism will correlate patient locations with nearby providers using the National Address Database, improving authenticity of provider-patient relationships. (5) Payer-specific companion guide rule checking will strengthen validation capabilities beyond basic X12 syntax compliance. (6) Denial simulation features will generate claims with common billing errors to support training in claims correction and resubmission workflows. Finally, (7) bidirectional transformation capabilities between X12 and HL7 FHIR Claims resources [@hl7fhir2023] will facilitate interoperability between traditional EDI and modern FHIR-based healthcare data exchange standards.</p>
+<h1 id="acknowledgments">Acknowledgments</h1>
+<p>This work utilizes publicly available healthcare databases from the Centers for Medicare &amp; Medicaid Services (CMS), including the National Provider Identifier (NPI) registry and Healthcare.gov insurance plan data. The author thanks the open-source community for foundational libraries (Faker, Flask, Pandas) that made this package possible.</p>
+<h1 id="code-generationllm-use">Code Generation/LLM Use</h1>
+<p>Claude Code (v2, Opus 4.5 – Claude Max) assisted in software development and manuscript preparation. For development, it was used to iterate on and refine the functional logic in <code>generator_837/api/segments.py</code> and <code>generator_837/api/generator.py</code>, and to draft and revise unit tests in <code>generator_837/tests/test_generator.py</code>. For the manuscript, Claude Code was primarily used to: (a) check for grammatical and syntactic errors, (b) reformat and perform edits to the markdown code blocks and some inline code examples, and (c) suggest minor wording changes for clarity and internal consistency of concepts. All output from Claude Code’s assistant was manually reviewed, and revised where needed.</p>
+<h1 id="references">References</h1>
+
+</body>
+
+</html>

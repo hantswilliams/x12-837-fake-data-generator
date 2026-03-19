@@ -29,17 +29,23 @@ This package combines authentic healthcare reference data from CMS databases (pr
 
 The X12 formatted 837 file is the standard for healthcare claim submission, used by providers, payers, and clearinghouses to process healthcare services. Understanding its structure is essential for healthcare informaticists learning data standards and interoperability, software developers building claims processing and revenue cycle management systems, data analysts performing utilization analysis and cost management, healthcare administrators testing system integrations and workflows, and researchers studying claims-based outcomes and population health.
 
-Despite the ubiquity of claims data, accessing the raw versions of X12-formatted 837 files for learning or testing is difficult due to HIPAA restrictions on Protected Health Information (PHI) and Personally Identifiable Information (PII) contained within these files. There are existing solutions and solutions that can be explore but they all have significant limitations. First are the commercial X12 test generators which can cost thousands of dollars annually, and provide limited customization [@x12org2023]. A second approach could be going with manual claim creation, which is time-intensive, error-prone, and not scalable. While a third approach could be de-identifying real data, which requires access to data in the first place, and carries re-identification risks and requires IRB approvals and data use agreements. Lastly, the few clinical data generators that we were able to find like Synthea [@walonoski2018] focus on EHR data rather than billing and claims formats, while the CMS synthetic data (SynPUF) [@cms2013synpuf] is Medicare-only, limited to specific years, and does not provide the data in the raw X12 format.
+# State of the Field
 
-We are not aware of any existing open-source tool that provides both generation and parsing of realistic X12 837 claims, with validation against current X12 standards. `X12-837-Fake-Data-Generator` fills this critical gap by enabling privacy-compliant (fake) claims data generation. 
+Despite the ubiquity of claims data, accessing the raw versions of X12-formatted 837 files for learning or testing is difficult due to HIPAA restrictions on Protected Health Information (PHI) and Personally Identifiable Information (PII) contained within these files. There are existing solutions and solutions that can be explore but they all have significant limitations. First are the commercial X12 test generators which can cost thousands of dollars annually, and provide limited customization [@x12org2023]. A second approach could be going with manual claim creation, which is time-intensive, error-prone, and not scalable. While a third approach could be de-identifying real data, which requires access to data in the first place, and carries re-identification risks and requires IRB approvals and data use agreements. Lastly, the few clinical data generators identified in the literature, such as Synthea [@walonoski2018] focus on EHR data rather than billing and claims formats, while the CMS synthetic data (SynPUF) [@cms2013synpuf] is Medicare-only, limited to specific years, and does not provide the data in the raw X12 format.
+
+To the author's knowledge, no existing open-source tool provides both generation and parsing of realistic X12 837 claims with validation against current X12 standards. `X12-837-Fake-Data-Generator` fills this critical gap by enabling privacy-compliant (fake) claims data generation. 
 
 The package provides realistic medical content using real ICD-10 diagnoses, CPT procedures, provider NPIs, and insurance payers from authoritative CMS databases. It generates synthetic patient data using validated algorithms through the Faker library, ensuring zero re-identification risk. The system produces standards-compliant X12 transactions verifiable with industry validators such as Stedi EDI Inspector and DataInsight Health. The package also combines both generation and parsing functionality in a single unified system, supporting diverse user needs through multiple interfaces including CLI for automation, web UI for accessibility, and REST API for integration. Comprehensive documentation and examples make the package particularly valuable for teaching healthcare data standards.
 
 This package is particularly valuable for academic institutions teaching health informatics, healthcare organizations testing claims systems, and researchers needing reproducible synthetic data for methods development.
 
-# Architecture and Implementation
+# Software Design
 
-## System Design
+## Overview
+
+The package adopts a two-module architecture, separating generation (`generator_837/`) and parsing (`parser_837/`) into separate components with distinct data flows. This separation reflects the fundamentally different operations each module performs: the generator assembles X12 transactions from reference data and synthetic demographics, while the parser deconstructs existing transactions into normalized relational tables using delimiter-based string operations. Despite this separation, both modules are unified through a shared web interface, REST API, and CLI, allowing users to select the access pattern that best fits their workflow.
+
+New software was developed rather than contributing to existing projects because no open-source tool currently addresses this specific gap. Synthea [@walonoski2018] generates clinical EHR data but does not produce X12 billing transactions. CMS SynPUF [@cms2013synpuf] provides claims in research file format, not native X12. Commercial EDI generators are proprietary and cost-prohibitive for educational and research use. None of these tools combine generation and parsing in a single system. Additionally, the package includes a client-side browser implementation using Pyodide (Python compiled to WebAssembly), enabling zero-installation access through GitHub Pages with all computation occurring locally in the user's browser, eliminating server dependencies and data privacy concerns.
 
 `X12-837-Fake-Data-Generator` consists of two primary modules, with three shared interface implementations:
 
@@ -61,7 +67,7 @@ The parser extracts structured data from X12 837 files into three normalized CSV
 
 ## Technical Implementation
 
-The package has only been tested in Python 3.11 or higher. Core dependencies include Faker [@faker2024] for synthetic demographic data generation, Pandas [@mckinney2010] for reference data loading and CSV operations, Flask [@flask2023] as the web application framework, Flask-RESTx [@flaskrestx2023] for REST API development with automatic OpenAPI/Swagger documentation, and the regex library for advanced pattern matching in X12 segment parsing.
+The package has only been tested in Python 3.11 or higher. Core dependencies include Faker [@faker2024] for synthetic demographic data generation, Pandas [@mckinney2010] for reference data loading and CSV operations, Flask [@flask2023] as the web application framework, Flask-RESTx [@flaskrestx2023] for REST API development with automatic OpenAPI/Swagger documentation, and the regex library for sanitizing payer name strings during claim generation.
 
 **Code Organization**:
 ```python
@@ -215,12 +221,16 @@ Synthea [@walonoski2018] excels at generating longitudinal patient clinical data
 
 Planned developments will expand the package's capabilities across multiple dimensions. (1) Integration with Synthea to enable generation of claims linked to patient clinical trajectories. This would allow correlation between clinical events and billing data. (2) Support for additional claim types including 837P (professional claims) and 837D (dental claims) will broaden the package's applicability beyond institutional claims. (3) Development of longitudinal data capabilities will enable generation of multi-claim patient histories suitable for outcomes research and care coordination studies. (4) Enhanced geographic realism will correlate patient locations with nearby providers using the National Address Database, improving authenticity of provider-patient relationships. (5) Payer-specific companion guide rule checking will strengthen validation capabilities beyond basic X12 syntax compliance. (6) Denial simulation features will generate claims with common billing errors to support training in claims correction and resubmission workflows. Finally, (7) bidirectional transformation capabilities between X12 and HL7 FHIR Claims resources [@hl7fhir2023] will facilitate interoperability between traditional EDI and modern FHIR-based healthcare data exchange standards.
 
+# Research Impact Statement
+
+This package addresses a practical barrier in healthcare informatics: the inability to freely access realistic X12 837 claims data for education, development, and research due to HIPAA restrictions. By providing both generation and parsing of standards-compliant synthetic claims, it enables workflows that previously required either expensive commercial tools or access to protected health information.
+
+# AI Usage Disclosure
+
+Claude Code (Anthropic, Claude Max – Opus 4.5) was used during the development and preparation of this work. For software development, Claude Code assisted with iterating on and refining functional logic in the generator and parser modules, including the single use of the `regex` library for payer name sanitization in `generator_837/api/generator.py`. Claude Code also assisted with drafting and revising unit tests. For manuscript preparation, it was used to check for grammatical and syntactic errors, reformat markdown code blocks and inline code examples, and suggest minor wording changes for clarity and consistency. All AI-generated output was manually reviewed, verified, and revised where needed by the author.
+
 # Acknowledgments
 
 This work utilizes publicly available healthcare databases from the Centers for Medicare & Medicaid Services (CMS), including the National Provider Identifier (NPI) registry and Healthcare.gov insurance plan data. The author thanks the open-source community for foundational libraries (Faker, Flask, Pandas) that made this package possible.
-
-# Code Generation/LLM Use
-
-Claude Code (v2, Opus 4.5 – Claude Max) assisted in software development and manuscript preparation. For development, it was used to iterate on and refine the functional logic in `generator_837/api/segments.py` and `generator_837/api/generator.py`, and to draft and revise unit tests in `generator_837/tests/test_generator.py`. For the manuscript, Claude Code was primarily used to: (a) check for grammatical and syntactic errors, (b) reformat and perform edits to the markdown code blocks and some inline code examples, and (c) suggest minor wording changes for clarity and internal consistency of concepts. All output from Claude Code’s assistant was manually reviewed, and revised where needed. 
 
 # References
